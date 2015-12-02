@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"idIntervention", "idTheme"}))
 public class Note implements Serializable{
@@ -23,27 +25,28 @@ public class Note implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idNote;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn( name = "idTheme" )
 	private Theme theme;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn( name = "idQualification" )
 	private Qualification qualification;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( name = "idIntervention" )
+	@JsonIgnore
 	private Intervention intervention;
 	
 
 	private String remarqueNote;
 	
 	// clés étrangères
-	@Column(name = "idTheme", insertable = false, updatable = false)
+	/*@Column(name = "idTheme", insertable = false, updatable = false)
 	private Long idTheme;
 	
 	@Column(name = "idQualification", insertable = false, updatable = false)
-	private Long idQualification;
+	private Long idQualification;*/
 	
 	@Column(name = "idIntervention", insertable = false, updatable = false)
 	private Long idIntervention;
@@ -82,7 +85,7 @@ public class Note implements Serializable{
 	public void setRemarqueNote(String remarqueNote) {
 		this.remarqueNote = remarqueNote;
 	}
-	public Long getIdTheme() {
+/*	public Long getIdTheme() {
 		return idTheme;
 	}
 	public void setIdTheme(Long idTheme) {
@@ -93,7 +96,7 @@ public class Note implements Serializable{
 	}
 	public void setIdQualification(Long idQualification) {
 		this.idQualification = idQualification;
-	}
+	}*/
 	
 	
 	public Intervention getIntervention() {

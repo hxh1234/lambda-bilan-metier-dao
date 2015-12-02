@@ -2,6 +2,7 @@ package com.lambda.bilan.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Objectif implements Serializable{
@@ -25,8 +30,13 @@ public class Objectif implements Serializable{
 	private String descriptifObjectif;
 	private String statutObjectif;
 	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="idObjectif")
+	private List<Mesure> mesures;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
+	@JsonIgnore
 	private Collaborateur collaborateur;
 	
 	public Collaborateur getCollaborateur() {

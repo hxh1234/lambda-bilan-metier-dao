@@ -24,16 +24,7 @@ public class Mesure implements Serializable{
 	private Integer resultatMesure;
 	private Boolean modeAccesMesure;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn( name = "idObjectif" )
-	private Objectif objectif;
-	
-	public Objectif getObjectif() {
-		return objectif;
-	}
-	public void setObjectif(Objectif objectif) {
-		this.objectif = objectif;
-	}
+
 	public ResponsableMesure getResponsableMesure() {
 		return responsableMesure;
 	}
