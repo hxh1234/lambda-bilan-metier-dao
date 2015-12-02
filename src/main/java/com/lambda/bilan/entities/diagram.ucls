@@ -104,7 +104,7 @@
   <class id="11" language="java" name="com.lambda.bilan.entities.Evaluateur" project="lambda-bilan-metier-dao" 
     file="/lambda-bilan-metier-dao/src/main/java/com/lambda/bilan/entities/Evaluateur.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="78" width="131" x="189" y="-97"/>    
+    <position height="75" width="131" x="189" y="-97"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
