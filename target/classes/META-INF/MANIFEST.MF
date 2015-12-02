@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: lambda-bilan-metier-dao
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Anas
+Built-By: jaouad-su
 Implementation-Vendor-Id: com.lambda.metier_dao
-Build-Jdk: 1.8.0_45
+Build-Jdk: 1.8.0_51
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 
