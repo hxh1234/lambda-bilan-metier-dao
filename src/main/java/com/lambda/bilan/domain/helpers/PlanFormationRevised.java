@@ -13,7 +13,6 @@ public class PlanFormationRevised {
 	private String moyensPlanFormation;
 	private List<Map<String, Object>> objectifs;
 
-	private PlanFormationRevised(){}
 	public PlanFormationRevised(PlanFormation planFormation) {
 		if(planFormation!=null){
 			this.dureePlanFormation=planFormation.getDureePlanFormation();
