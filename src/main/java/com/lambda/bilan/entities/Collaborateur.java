@@ -3,8 +3,6 @@ package com.lambda.bilan.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,8 +23,8 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	private ManagerRH managerRH;
 	
 	// clé étrangère
-	@Column(name = "idManagerRH", insertable = false, updatable = false)
-	private Long idManagerRH;
+	//@Column(name = "idManagerRH", insertable = false, updatable = false)
+	//private Long idManagerRH;
 	
 	public Collaborateur() {
 		super();
@@ -56,12 +54,12 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	public void setManagerRH(ManagerRH managerRH) {
 		this.managerRH = managerRH;
 	}
-	public long getIdManagerRH() {
+/*	public long getIdManagerRH() {
 		return idManagerRH;
 	}
 	public void setIdManagerRH(Long idManagerRH) {
 		this.idManagerRH = idManagerRH;
-	}
+	}*/
 	
 	
 

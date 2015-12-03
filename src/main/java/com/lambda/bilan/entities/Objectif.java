@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -30,15 +29,20 @@ public class Objectif implements Serializable{
 	private String descriptifObjectif;
 	private String statutObjectif;
 	
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="idObjectif")
 	private List<Mesure> mesures;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
-	@JsonIgnore
 	private Collaborateur collaborateur;
 	
+	public List<Mesure> getMesures() {
+		return mesures;
+	}
+	public void setMesures(List<Mesure> mesures) {
+		this.mesures = mesures;
+	}
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
 	}
@@ -51,7 +55,7 @@ public class Objectif implements Serializable{
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	public Long getIdCollaborateur() {
+	/*public Long getIdCollaborateur() {
 		return idCollaborateur;
 	}
 	public void setIdCollaborateur(Long idCollaborateur) {
@@ -62,17 +66,17 @@ public class Objectif implements Serializable{
 	}
 	public void setIdCategorie(Long idCategorie) {
 		this.idCategorie = idCategorie;
-	}
+	}*/
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCategorie")
 	private Categorie categorie;
 	
-	// clés étrangères
+	/* clés étrangères
 	@Column(name = "idCollaborateur", insertable = false, updatable = false)
 	private Long idCollaborateur;
 	
 	@Column(name = "idCategorie", insertable = false, updatable = false)
-	private Long idCategorie;
+	private Long idCategorie;*/
 	
 	public Objectif() {
 		super();

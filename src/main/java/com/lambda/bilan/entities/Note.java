@@ -2,7 +2,6 @@ package com.lambda.bilan.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"idIntervention", "idTheme"}))
@@ -35,7 +32,6 @@ public class Note implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( name = "idIntervention" )
-	@JsonIgnore
 	private Intervention intervention;
 	
 
@@ -46,10 +42,10 @@ public class Note implements Serializable{
 	private Long idTheme;
 	
 	@Column(name = "idQualification", insertable = false, updatable = false)
-	private Long idQualification;*/
+	private Long idQualification;
 	
 	@Column(name = "idIntervention", insertable = false, updatable = false)
-	private Long idIntervention;
+	private Long idIntervention;*/
 	
 	
 	
@@ -96,7 +92,15 @@ public class Note implements Serializable{
 	}
 	public void setIdQualification(Long idQualification) {
 		this.idQualification = idQualification;
-	}*/
+	}
+	public Long getIdIntervention() {
+		return idIntervention;
+	}
+
+	public void setIdIntervention(Long idIntervention) {
+		this.idIntervention = idIntervention;
+	}
+	*/
 	
 	
 	public Intervention getIntervention() {
@@ -107,12 +111,6 @@ public class Note implements Serializable{
 		this.intervention = intervention;
 	}
 
-	public Long getIdIntervention() {
-		return idIntervention;
-	}
 
-	public void setIdIntervention(Long idIntervention) {
-		this.idIntervention = idIntervention;
-	}
 	
 }

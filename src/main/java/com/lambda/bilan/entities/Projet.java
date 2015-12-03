@@ -2,7 +2,6 @@ package com.lambda.bilan.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,9 +24,9 @@ public class Projet implements Serializable{
     @JoinColumn(name = "idEvaluateur")
 	private Evaluateur evaluateur;
 	
-	// clé étrangère
+	/* clé étrangère
 	@Column(name = "idEvaluateur", insertable = false, updatable = false)
-	private Long idEvaluateur;
+	private Long idEvaluateur;*/
 	
 	
 	public Evaluateur getEvaluateur() {
@@ -36,12 +35,13 @@ public class Projet implements Serializable{
 	public void setEvaluateur(Evaluateur evaluateur) {
 		this.evaluateur = evaluateur;
 	}
-	public Long getIdEvaluateur() {
+
+	/*	public Long getIdEvaluateur() {
 		return idEvaluateur;
 	}
 	public void setIdEvaluateur(Long idEvaluateur) {
 		this.idEvaluateur = idEvaluateur;
-	}
+	}*/
 	public Projet() {
 		super();
 		// TODO Auto-generated constructor stub

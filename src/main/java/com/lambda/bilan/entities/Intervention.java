@@ -3,8 +3,6 @@ package com.lambda.bilan.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,11 +36,11 @@ public class Intervention implements Serializable{
     @JoinColumn(name = "idCollaborateur")
 	private Collaborateur collaborateur;
 	
-	// clé étrangères
+	/* clé étrangères
 	@Column(name = "idProjet", insertable = false, updatable = false)
 	private Long idProjet;
 	@Column(name = "idCollaborateur", insertable = false, updatable = false)
-	private Long idCollaborateur;
+	private Long idCollaborateur;*/
 	
 	
 	public Intervention() {
@@ -103,7 +101,7 @@ public class Intervention implements Serializable{
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
 	}
-	public Long getIdProjet() {
+	/*public Long getIdProjet() {
 		return idProjet;
 	}
 	public void setIdProjet(Long idProjet) {
@@ -114,7 +112,7 @@ public class Intervention implements Serializable{
 	}
 	public void setIdCollaborateur(Long idCollaborateur) {
 		this.idCollaborateur = idCollaborateur;
-	}
+	}*/
 	public Boolean getEtatIntervention() {
 		return etatIntervention;
 	}
