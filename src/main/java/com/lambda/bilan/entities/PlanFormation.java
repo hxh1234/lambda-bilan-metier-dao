@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class PlanFormation implements Serializable{
 	}
 	private String moyensPlanFormation;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="objectif_planFormation",
 	joinColumns={@JoinColumn(name="idPlanFormation")},
 	inverseJoinColumns={@JoinColumn(name="idObjectif")})
