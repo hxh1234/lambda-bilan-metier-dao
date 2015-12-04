@@ -1,13 +1,16 @@
 package com.lambda.bilan.dao;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Date;
+import java.util.List;
 
-import com.lambda.bilan.entities.Administrateur;
+import org.springframework.data.repository.CrudRepository;
+
+import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Objectif;
-import com.lambda.bilan.entities.Utilisateur;
 
 
 public interface ObjectifDAO extends CrudRepository<Objectif, Long> {
+	
+	public List<Objectif> findByCollaborateurAndDateCreationObjectifBetween(Collaborateur collaborateur, Date dateDebut,Date dateFin);
 	
 }

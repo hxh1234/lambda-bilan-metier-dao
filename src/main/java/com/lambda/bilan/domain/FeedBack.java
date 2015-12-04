@@ -25,7 +25,11 @@ public class FeedBack {
 		this.totalePoids = totalePoids;
 		this.noteGlobale = noteGlobale;
 	}
-
+	
+	public FeedBack() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
