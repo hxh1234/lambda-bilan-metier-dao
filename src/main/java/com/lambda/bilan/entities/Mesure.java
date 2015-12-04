@@ -2,7 +2,6 @@ package com.lambda.bilan.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,13 @@ public class Mesure implements Serializable{
 	private Integer resultatMesure;
 	private Boolean modeAccesMesure;
 	
-
+	
+	
+	public Mesure(Long idMesure, String commentMesurer) {
+		super();
+		this.idMesure = idMesure;
+		this.commentMesurer = commentMesurer;
+	}
 	public ResponsableMesure getResponsableMesure() {
 		return responsableMesure;
 	}
@@ -43,7 +48,7 @@ public class Mesure implements Serializable{
 	public void setIdResponsableMesure(Long idResponsableMesure) {
 		this.idResponsableMesure = idResponsableMesure;
 	}*/
-	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn( name = "idResponsableMesure" )
 	private ResponsableMesure responsableMesure;
 	

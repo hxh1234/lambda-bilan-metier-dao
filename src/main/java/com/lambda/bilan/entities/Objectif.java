@@ -29,13 +29,24 @@ public class Objectif implements Serializable{
 	private String descriptifObjectif;
 	private String statutObjectif;
 	
-	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="idObjectif")
 	private List<Mesure> mesures;
 	
+	public Objectif(Long idObjectif, String nomObjectif, List<Mesure> mesures) {
+		super();
+		this.idObjectif = idObjectif;
+		this.nomObjectif = nomObjectif;
+		this.mesures = mesures;
+	}
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
 	private Collaborateur collaborateur;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCategorie")
+	private Categorie categorie;
+	
 	
 	public List<Mesure> getMesures() {
 		return mesures;
@@ -67,9 +78,7 @@ public class Objectif implements Serializable{
 	public void setIdCategorie(Long idCategorie) {
 		this.idCategorie = idCategorie;
 	}*/
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCategorie")
-	private Categorie categorie;
+
 	
 	/* clés étrangères
 	@Column(name = "idCollaborateur", insertable = false, updatable = false)
