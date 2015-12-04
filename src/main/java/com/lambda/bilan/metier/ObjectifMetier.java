@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.lambda.bilan.metier;
 
 import java.util.Calendar;
@@ -7,45 +7,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.lambda.bilan.dao.ObjectifDAO;
-import com.lambda.bilan.entities.Collaborateur;
-import com.lambda.bilan.entities.Objectif;
-
-@Service("Objectif")
-public class ObjectifMetier implements IObjectifMetier {
-
-	@Autowired
-	private ObjectifDAO objectifDAO;
-	
-	
-	@Override
-	public List<Objectif> getAllObjectifOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) {
-		return objectifDAO.findByCollaborateurAndDateCreationObjectifBetween(collaborateur, dateBAP, datePlus(dateBAP));
-	}
-	
-	
-	
-	/*
-	 * Methode utile
-	 */
-	private Date datePlus(Date date){
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.add(Calendar.MONTH, 11);
-		date = cal.getTime();
-		return date;
-	}
-
-}
-=======
-package com.lambda.bilan.metier;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lambda.bilan.dao.ObjectifDAO;
+import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Objectif;
 
 @Transactional
@@ -74,6 +39,23 @@ public class ObjectifMetier implements IObjectifMetier{
 	public Objectif getObjectif(Long id) {
 			return objectifDAO.findOne(id);
 	}
+	
+	@Override
+	public List<Objectif> getAllObjectifOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) {
+		return objectifDAO.findByCollaborateurAndDateCreationObjectifBetween(collaborateur, dateBAP, datePlus(dateBAP));
+	}
+	
+	
+	
+	/*
+	 * Methode utile
+	 */
+	private Date datePlus(Date date){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.MONTH, 11);
+		date = cal.getTime();
+		return date;
+	}
 
 }
->>>>>>> 8068d9ba146ae1e622f3601ef0b4f8ed112138cc
