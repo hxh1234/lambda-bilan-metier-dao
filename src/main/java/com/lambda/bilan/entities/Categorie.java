@@ -22,6 +22,13 @@ public class Categorie implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public Categorie(Long idCategorie) {
+		super();
+		this.idCategorie = idCategorie;
+	}
+
+
 	public Long getIdCategorie() {
 		return idCategorie;
 	}

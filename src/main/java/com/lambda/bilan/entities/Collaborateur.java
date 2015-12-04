@@ -18,7 +18,8 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	private String posteActuelCollaborateur;
 	private Boolean etatCollaborateur;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idManagerRH")
 	private ManagerRH managerRH;
 	
