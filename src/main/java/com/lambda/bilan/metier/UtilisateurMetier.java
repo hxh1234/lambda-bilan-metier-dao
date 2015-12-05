@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
 import com.lambda.bilan.dao.CollaborateurDAO;
 import com.lambda.bilan.dao.UtilisateurDAO;
 import com.lambda.bilan.entities.Collaborateur;
@@ -31,6 +32,12 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	@Override
 	public List<Collaborateur> getAllCollaborateurOfProjet(Long idProjet) {
 		return collaborateurDAO.getAllCollaborateurOfProjet(idProjet);
+	}
+	
+	@Override
+	public List<Collaborateur> getAllCollaborateurWithoutProject() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -58,6 +65,13 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		return utilisateurDao.findOne(id);
 		
 	}
+
+	@Override
+	public List<Utilisateur> getAllUtilisateur() {
+		return Lists.newArrayList(utilisateurDao.findAll());
+	}
+
+	
 
 
 	

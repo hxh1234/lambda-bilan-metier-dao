@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -20,7 +22,9 @@ public class Intervention implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idIntervention;
+	@Temporal(TemporalType.DATE)
 	private Date dateDebutIntervention;
+	@Temporal(TemporalType.DATE)
 	private Date dateFinIntervention;
 	private Integer nombreJoursValorises;
 	private String nomIntervention;
@@ -45,7 +49,7 @@ public class Intervention implements Serializable{
 	
 	public Intervention() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.etatIntervention=false;
 	}
 	public Long getIdIntervention() {
 		return idIntervention;

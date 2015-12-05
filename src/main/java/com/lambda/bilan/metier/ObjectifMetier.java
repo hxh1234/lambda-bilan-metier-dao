@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lambda.bilan.dao.ObjectifDAO;
+import com.lambda.bilan.domain.FicheObjectifs;
 import com.lambda.bilan.entities.Collaborateur;
+import com.lambda.bilan.entities.Mesure;
 import com.lambda.bilan.entities.Objectif;
 
 @Transactional
-@Service
+@Service("Objectif")
 public class ObjectifMetier implements IObjectifMetier{
 
 	@Autowired
@@ -41,11 +43,26 @@ public class ObjectifMetier implements IObjectifMetier{
 	}
 	
 	@Override
-	public List<Objectif> getAllObjectifOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) {
+	public void updateObjectifs(List<Objectif> objectifs){
+		objectifDAO.save(objectifs);
+	}
+	
+	@Override
+	public List<Objectif> getAllObjectifsOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) {
 		return objectifDAO.findByCollaborateurAndDateCreationObjectifBetween(collaborateur, dateBAP, datePlus(dateBAP));
 	}
 	
-	
+	@Override
+	public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP){
+		List<Objectif> objectifs =objectifDAO.findByCollaborateurAndDateCreationObjectifBetween(collaborateur, dateBAP, datePlus(dateBAP));
+		long noteFinal=0;
+		for (Objectif objectif : objectifs) {
+			for (Mesure mesure : objectif.getMesures()) {
+				noteFinal+=mesure.getResultatMesure();
+			}
+		}	
+		return new FicheObjectifs(objectifs, noteFinal);
+	}
 	
 	/*
 	 * Methode utile

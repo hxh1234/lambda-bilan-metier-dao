@@ -9,6 +9,9 @@ public class FicheObjectifs {
 	private List<Objectif> objectifs;
 	private long noteFinal;
 	
+	public FicheObjectifs() {
+		super();
+	}
 	
 	public FicheObjectifs(List<Objectif> objectifs, long noteFinal) {
 		super();

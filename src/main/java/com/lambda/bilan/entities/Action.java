@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Action implements Serializable{
@@ -19,6 +21,7 @@ public class Action implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAction;
+	@Temporal(TemporalType.DATE)
 	private Date dateAction;
 	private String messageAction;
 	@ManyToOne(fetch = FetchType.LAZY)

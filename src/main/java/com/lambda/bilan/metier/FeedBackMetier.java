@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lambda.bilan.dao.InterventionDAO;
 import com.lambda.bilan.dao.NoteDAO;
@@ -16,6 +17,7 @@ import com.lambda.bilan.entities.Intervention;
 import com.lambda.bilan.entities.Note;
 
 @Service("FeedBack")
+@Transactional
 public class FeedBackMetier implements IFeedBackMetier {
 
 	@Autowired
@@ -31,7 +33,7 @@ public class FeedBackMetier implements IFeedBackMetier {
 		else{
 			FeedBack feedBack;
 			Date dateDebut = dateBAP;
-			Date dateFin = datePlusYear(dateDebut);
+			Date dateFin = datePlus(dateDebut);
 			List<Note> notes;
 			List<FeedBack> feedBacks = new ArrayList<FeedBack>();
 			for(Intervention intervention : interventionDAO.findByDateFinInterventionBetweenAndCollaborateur(dateDebut, dateFin, collaborateur)){
@@ -64,10 +66,10 @@ public class FeedBackMetier implements IFeedBackMetier {
 	/*
 	 * Methode utile
 	 */
-	private Date datePlusYear(Date dateDebut){
+	private Date datePlus(Date dateDebut){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dateDebut);
-		cal.add(Calendar.MONTH, 12);
+		cal.add(Calendar.MONTH, 11);
 		dateDebut = cal.getTime();
 		return dateDebut;
 	}

@@ -2,9 +2,6 @@ package com.lambda.bilan.metier;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Utilisateur;
 
@@ -17,6 +14,9 @@ public interface IUtilisateurMetier {
 		//Les collaborateurs intervenants dans un Projet
 		public List<Collaborateur> getAllCollaborateurOfProjet(Long idProjet);
 	
+		//Les collaborateur qui en pas des projets
+		public List<Collaborateur> getAllCollaborateurWithoutProject();
+		
 	    ////CRUD des utilisateurs:
 		
 		public void addUtilisateur(Utilisateur utilisateur);
@@ -24,6 +24,7 @@ public interface IUtilisateurMetier {
 		public void deleteUtilisateur(Long id);
 		public Utilisateur getUtilisateur(Long id);
 		
+		public List<Utilisateur> getAllUtilisateur();
 		
 		/*
 		//Collaborateur

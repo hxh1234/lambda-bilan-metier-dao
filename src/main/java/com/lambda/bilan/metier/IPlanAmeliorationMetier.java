@@ -1,12 +1,13 @@
 package com.lambda.bilan.metier;
 
-import java.util.List;
+import java.util.Date;
 
 import com.lambda.bilan.domain.PlanAmelioration;
+import com.lambda.bilan.entities.Collaborateur;
 
 public interface IPlanAmeliorationMetier {
 	
-	public List<PlanAmelioration> getPlanAmelioration();
-	
+	public PlanAmelioration getPlanAmeliorationOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP);
+	public void addPlanAmelioration(PlanAmelioration planAmelioration);
 
 }
