@@ -8,12 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @DiscriminatorValue( "COLLABORATEUR" )
 public class Collaborateur extends Utilisateur implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	@Temporal(TemporalType.DATE)
 	private Date dateEmbaucheCollaborateur;
 	private String posteActuelCollaborateur;
 	private Boolean etatCollaborateur;

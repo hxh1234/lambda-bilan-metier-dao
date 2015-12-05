@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
@@ -30,6 +32,7 @@ public class Utilisateur implements Serializable {
 	private String nomUtilisateur;
 	private String prenomUtilisateur;
 	private String emailUtilisateur;
+	@Temporal(TemporalType.DATE)
 	private Date dateNaissanceUtilisateur;
 	private String adresseUtilisateur;
 	
