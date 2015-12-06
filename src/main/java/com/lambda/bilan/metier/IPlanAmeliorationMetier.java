@@ -10,4 +10,5 @@ public interface IPlanAmeliorationMetier {
 	public PlanAmelioration getPlanAmeliorationOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP);
 	public void addPlanAmelioration(PlanAmelioration planAmelioration);
 
+
 }

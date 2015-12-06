@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +26,8 @@ public class PlanAmeliorationMetier implements IPlanAmeliorationMetier {
 	private PlanFormationDAO planFormationDAO;
 	@Autowired
 	private ActionDAO actionDAO ;
-	
-	
+
+
 	@Override
 	public PlanAmelioration getPlanAmeliorationOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) {
 		List<PlanFormation> planFormations; 
@@ -33,14 +36,13 @@ public class PlanAmeliorationMetier implements IPlanAmeliorationMetier {
 		actions=actionDAO.findByDateActionBetweenAndCollaborateur(dateBAP, datePlus(dateBAP), collaborateur);	
 		return new PlanAmelioration(planFormations, actions);
 	}
-	
+
 	@Override
 	public void addPlanAmelioration(PlanAmelioration planAmelioration) {
 		planFormationDAO.save(planAmelioration.getPlanFormations());
 		actionDAO.save(planAmelioration.getActions());
 	}
-	
-	
+
 	/*
 	 * Methode utile
 	 */
