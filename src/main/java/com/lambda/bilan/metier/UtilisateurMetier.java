@@ -36,8 +36,12 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	
 	@Override
 	public List<Collaborateur> getAllCollaborateurWithoutProject() {
-		// TODO Auto-generated method stub
-		return null;
+		return collaborateurDAO.getAllCollaborateurWithoutProject();
+	}
+	
+	@Override
+	public List<Collaborateur> getAllCollaborateurWithoutObjectif() {
+		return collaborateurDAO.getAllCollaborateurWithoutObjectif();
 	}
 
 	@Override

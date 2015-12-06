@@ -17,6 +17,9 @@ public interface IUtilisateurMetier {
 		//Les collaborateur qui en pas des projets
 		public List<Collaborateur> getAllCollaborateurWithoutProject();
 		
+		//Les collaborateur qui en pas des objectifs
+		public List<Collaborateur> getAllCollaborateurWithoutObjectif();
+		
 	    ////CRUD des utilisateurs:
 		
 		public void addUtilisateur(Utilisateur utilisateur);
