@@ -2,7 +2,9 @@ package com.lambda.bilan.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -31,6 +34,10 @@ public class Intervention implements Serializable{
 	private String remarqueIntervention;
 	private String roleJoue;
 	private Boolean etatIntervention;
+	
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
+	@JoinColumn(name="idObjectif")
+	private List<Note> notes;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProjet")
