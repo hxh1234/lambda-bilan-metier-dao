@@ -1,25 +1,17 @@
 package com.lambda.bilan.domain;
 
-import java.util.List;
-
 import com.lambda.bilan.entities.Intervention;
-import com.lambda.bilan.entities.Note;
 
 public class FeedBack {
 	
-	private List<Note> notes;
 	private Intervention intervention;
 	private Integer nbrThemeQualifies;
 	private Integer totalePoids;
 	private long noteGlobale;
-	public List<Note> getNotes() {
-		return notes;
-	}
 	
-	public FeedBack(List<Note> notes, Intervention intervention, Integer nbrThemeQualifies, Integer totalePoids,
+	public FeedBack(Intervention intervention, Integer nbrThemeQualifies, Integer totalePoids,
 			long noteGlobale) {
 		super();
-		this.notes = notes;
 		this.intervention = intervention;
 		this.nbrThemeQualifies = nbrThemeQualifies;
 		this.totalePoids = totalePoids;
@@ -28,11 +20,6 @@ public class FeedBack {
 	
 	public FeedBack() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public void setNotes(List<Note> notes) {
-		this.notes = notes;
 	}
 	public Intervention getIntervention() {
 		return intervention;

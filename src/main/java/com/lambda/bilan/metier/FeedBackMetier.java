@@ -40,7 +40,7 @@ public class FeedBackMetier implements IFeedBackMetier {
 				feedBack=new FeedBack();
 				feedBack.setIntervention(intervention);
 				notes = new ArrayList<Note>(noteDAO.findByIntervention(intervention));
-				feedBack.setNotes(notes);
+				//feedBack.setNotes(notes);
 
 				int nbrThemeQualifies=0;
 				int totalePoids=0;
@@ -64,7 +64,7 @@ public class FeedBackMetier implements IFeedBackMetier {
 
 	@Override
 	public void addFeedBack(FeedBack feedBack) {
-		noteDAO.save(feedBack.getNotes());
+		//noteDAO.save(//feedBack.getNotes());
 	}
 
 

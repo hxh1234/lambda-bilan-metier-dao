@@ -2,23 +2,23 @@ package com.lambda.bilan.domain;
 
 public class BAP {
 
-	private String periode;
+	private String dateBAP;
 	private String status;
 	
 	
 	public BAP() {
 		super();
 	}
-	public BAP(String periode, String status) {
+	public BAP(String dateBAP, String status) {
 		super();
-		this.periode = periode;
+		this.dateBAP = dateBAP;
 		this.status = status;
 	}
-	public String getPeriode() {
-		return periode;
+	public String getdateBAP() {
+		return dateBAP;
 	}
-	public void setPeriode(String periode) {
-		this.periode = periode;
+	public void setdateBAP(String dateBAP) {
+		this.dateBAP = dateBAP;
 	}
 	
 	public String getStatus() {

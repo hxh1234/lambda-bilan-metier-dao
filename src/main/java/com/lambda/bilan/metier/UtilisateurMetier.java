@@ -16,14 +16,12 @@ import com.lambda.bilan.entities.Utilisateur;
 @Transactional
 public class UtilisateurMetier implements IUtilisateurMetier {
 	
-	//------
 	@Autowired
-	private UtilisateurDAO utilisateurDao;
-	
+	private UtilisateurDAO utilisateurDao;	
 	@Autowired
 	private CollaborateurDAO collaborateurDAO;
+
 	
-    //------
 	@Override
 	public List<Collaborateur> getAllCollaborateurOfManagerRH(Long idManagerRH) {
 		return collaborateurDAO.getAllCollaborateurOfManagerRH( idManagerRH);
@@ -62,7 +60,6 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		
 	}
 	
-	
 
 	@Override
 	public Utilisateur getUtilisateur(Long id) {
@@ -74,10 +71,5 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	public List<Utilisateur> getAllUtilisateur() {
 		return Lists.newArrayList(utilisateurDao.findAll());
 	}
-
 	
-
-
-	
-
 }
