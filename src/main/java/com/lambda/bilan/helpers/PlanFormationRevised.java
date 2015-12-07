@@ -1,4 +1,4 @@
-package com.lambda.bilan.domain.helpers;
+package com.lambda.bilan.helpers;
 
 import java.util.HashMap;
 import java.util.List;

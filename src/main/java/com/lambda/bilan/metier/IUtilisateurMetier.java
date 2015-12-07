@@ -28,31 +28,5 @@ public interface IUtilisateurMetier {
 		public Utilisateur getUtilisateur(Long id);
 		
 		public List<Utilisateur> getAllUtilisateur();
-		
-		/*
-		//Collaborateur
-		public void addCollaborateur(Collaborateur collaborateur);
-		public void updateCollaborateur(Collaborateur collaborateur);
-		public void deleteCollaborateur(Long id);
-		public void getCollaborateur(Long id);
-	
-		//Administrateur
-		public void addAdministrateur(Administrateur administrateur);
-		public void updateAdministrateur(Administrateur administrateur);
-		public void deleteAdministrateur(Long id);
-		public void getAdministrateur(Long id);
-		
-		//ManagerRH
-		public void addManagerRH(ManagerRH managerRH);
-		public void updateManagerRHr(ManagerRH managerRH);
-		public void deleteManagerRH(Long id);
-		public void getManagerRH(Long id);
-	
-		//Evaluateur
-		public void addEvaluateur(Evaluateur evaluateur);
-		public void updateEvaluateur(Evaluateur evaluateur);
-		public void deleteEvaluateur(Long id);
-		public void getEvaluateur(Long id); */
-
 
 }

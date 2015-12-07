@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.lambda.bilan.dao.ProjetDAO;
+import com.lambda.bilan.entities.Evaluateur;
 import com.lambda.bilan.entities.Projet;
 
 @Transactional
@@ -43,6 +44,11 @@ public class ProjetMetier implements IProjetMetier {
 	@Override
 	public Projet getProjet(Long id) {
 		return projetDAO.findOne(id);
+	}
+
+	@Override
+	public List<Projet> getAllProjetOfEvaluateur(Evaluateur evaluateur) {
+		return projetDAO.findAllByEvaluateur(evaluateur);
 	}
 
 }

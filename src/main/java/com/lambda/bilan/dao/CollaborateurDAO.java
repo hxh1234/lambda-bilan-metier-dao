@@ -21,6 +21,6 @@ public interface CollaborateurDAO extends CrudRepository<Collaborateur, Long> {
 	@Query("select c from Collaborateur c where c not in (select i.collaborateur from Intervention i where i.dateFinIntervention > current_date())")
 	public List<Collaborateur> getAllCollaborateurWithoutProject();
 	
-	@Query("select c from Collaborateur c where c not in (select o.collaborateur from Objectif o where i.dateFinIntervention > current_date())")
+	@Query("select c from Collaborateur c where c not in (select o.collaborateur from Objectif o")
 	public List<Collaborateur> getAllCollaborateurWithoutObjectif();
 }

@@ -18,5 +18,6 @@ public interface IObjectifMetier {
 		public void updateObjectifs(List<Objectif> objectifs);
 		
 		public List<Objectif> getAllObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP);
+		public List<Objectif> getAllObjectifsOfCollaborateurThisYear(Collaborateur collaborateur);
 		public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP);
 }

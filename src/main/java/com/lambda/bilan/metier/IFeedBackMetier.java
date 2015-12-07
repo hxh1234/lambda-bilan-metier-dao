@@ -9,4 +9,5 @@ import com.lambda.bilan.entities.Collaborateur;
 public interface IFeedBackMetier {
 	
 	public List<FeedBack> getAllfeedBackOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP);
+	public void addFeedBack(FeedBack feedBack);
 }

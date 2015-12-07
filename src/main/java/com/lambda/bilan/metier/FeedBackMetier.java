@@ -62,6 +62,11 @@ public class FeedBackMetier implements IFeedBackMetier {
 	}
 
 
+	@Override
+	public void addFeedBack(FeedBack feedBack) {
+		noteDAO.save(feedBack.getNotes());
+	}
+
 
 	/*
 	 * Methode utile
@@ -73,5 +78,6 @@ public class FeedBackMetier implements IFeedBackMetier {
 		dateDebut = cal.getTime();
 		return dateDebut;
 	}
+
 
 }
