@@ -10,7 +10,7 @@ import com.lambda.bilan.entities.PlanFormation;
 
 
 public interface PlanFormationDAO extends CrudRepository<PlanFormation, Long> {
-	public List<PlanFormation> findByObjectifs_dateCreationObjectifBetweenAndObjectifs_Collaborateur( Date dateDebut,Date dateFin,Collaborateur collaborateur) throws Exception;
+	public List<PlanFormation> findByObjectifs_dateCreationObjectifBetweenAndObjectifs_Collaborateur( Date dateDebut,Date dateFin,Collaborateur collaborateur);
 
 	
 }

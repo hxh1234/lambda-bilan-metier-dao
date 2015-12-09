@@ -15,7 +15,7 @@ import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
-@Transactional
+@Transactional(rollbackFor= LambdaException.class)
 @Service("BAPMetier")
 public class BAPMetier implements IBAPMetier {
 

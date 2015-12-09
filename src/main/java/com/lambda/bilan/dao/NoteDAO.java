@@ -9,6 +9,6 @@ import com.lambda.bilan.entities.Note;
 
 public interface NoteDAO extends CrudRepository<Note, Long> {
 	
-	public List<Note> findByIntervention(Intervention intervention)  throws Exception;
+	public List<Note> findByIntervention(Intervention intervention);
 	
 }

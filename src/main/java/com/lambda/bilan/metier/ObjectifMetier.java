@@ -18,7 +18,7 @@ import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
 
-@Transactional
+@Transactional(rollbackFor= LambdaException.class)
 @Service("Objectif")
 public class ObjectifMetier implements IObjectifMetier{
 

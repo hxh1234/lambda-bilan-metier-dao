@@ -19,7 +19,7 @@ import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service("FeedBack")
-@Transactional
+@Transactional(rollbackFor= LambdaException.class)
 public class FeedBackMetier implements IFeedBackMetier {
 
 	@Autowired

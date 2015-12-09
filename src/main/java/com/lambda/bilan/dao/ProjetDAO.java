@@ -15,5 +15,5 @@ public interface ProjetDAO extends CrudRepository<Projet, Long> {
 	public List<Projet> findAllByEvaluateur(Evaluateur evaluateur)  throws LambdaException;
 	
 	@Query("select p from Projet p where p in (select i.projet from Intervention i where i.dateFinIntervention >current_date() and i.collaborateur = ?1)")  
-	public List<Projet> getAllProjetOfCollaborateur(Collaborateur collaborateur) throws LambdaException;
+	public List<Projet> getAllProjetOfCollaborateur(Collaborateur collaborateur);
 }

@@ -15,7 +15,7 @@ import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service
-@Transactional
+@Transactional (rollbackFor= LambdaException.class)
 public class UtilisateurMetier implements IUtilisateurMetier {
 
 	@Autowired
@@ -67,6 +67,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.add.fail"));
 		}
+
 	}
 
 	@Override

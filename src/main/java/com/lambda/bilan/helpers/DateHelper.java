@@ -1,9 +1,11 @@
 package com.lambda.bilan.helpers;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.google.api.client.util.DateTime;
 import com.lambda.bilan.entities.Collaborateur;
 
 public class DateHelper {
@@ -72,5 +74,12 @@ public class DateHelper {
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("generale.date.notfound"));
 		}
+	}
+	
+	public static DateTime getCurrentDate(){
+    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    	String stringDate = df.format(new Date());
+    	DateTime dt = new DateTime(stringDate);
+    	return dt;
 	}
 }

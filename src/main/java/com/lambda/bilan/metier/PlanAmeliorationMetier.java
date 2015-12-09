@@ -18,7 +18,7 @@ import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service
-@Transactional
+@Transactional(rollbackFor= LambdaException.class)
 public class PlanAmeliorationMetier implements IPlanAmeliorationMetier {
 
 	@Autowired

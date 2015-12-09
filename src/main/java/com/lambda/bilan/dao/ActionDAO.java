@@ -10,6 +10,6 @@ import com.lambda.bilan.entities.Collaborateur;
 
 public interface ActionDAO extends CrudRepository<Action, Long> {
 	
-	public List<Action> findByDateActionBetweenAndCollaborateur( Date dateDebut,Date dateFin,Collaborateur collaborateur) throws Exception;
+	public List<Action> findByDateActionBetweenAndCollaborateur( Date dateDebut,Date dateFin,Collaborateur collaborateur) ;
 
 }

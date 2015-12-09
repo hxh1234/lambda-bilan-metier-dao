@@ -2,10 +2,10 @@ package com.lambda.bilan.metier;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 import com.lambda.bilan.dao.ProjetDAO;
@@ -15,8 +15,9 @@ import com.lambda.bilan.entities.Projet;
 import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
-@Transactional
+
 @Service("Projet")
+@Transactional(rollbackFor= LambdaException.class)
 public class ProjetMetier implements IProjetMetier {
 	
 	@Autowired

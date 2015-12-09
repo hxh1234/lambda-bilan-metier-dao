@@ -13,6 +13,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+
 
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
@@ -24,17 +27,18 @@ public class Utilisateur implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idUtilisateur;
+	private Long idUtilisateur;	
 	private String urlPhotoUtilisateur;
 	private String passwordUtilisateur;
 	private String telephoneUtilisateur;
 	private String sexeUtilisateur;
-	private String nomUtilisateur;
+	@NotNull private String nomUtilisateur;
 	private String prenomUtilisateur;
 	private String emailUtilisateur;
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissanceUtilisateur;
 	private String adresseUtilisateur;
+	private String idCalendrierUtilisateur;
 	
 	
 	
@@ -121,6 +125,16 @@ public class Utilisateur implements Serializable {
 	}
 	public void setUrlPhotoUtilisateur(String urlPhotoUtilisateur) {
 		this.urlPhotoUtilisateur = urlPhotoUtilisateur;
+	}
+
+
+	public String getIdCalendrierUtilisateur() {
+		return idCalendrierUtilisateur;
+	}
+
+
+	public void setIdCalendrierUtilisateur(String idCalendrierUtilisateur) {
+		this.idCalendrierUtilisateur = idCalendrierUtilisateur;
 	}
 	
 	
