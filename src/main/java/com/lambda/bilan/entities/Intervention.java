@@ -112,24 +112,19 @@ public class Intervention implements Serializable{
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
 	}
-	/*public Long getIdProjet() {
-		return idProjet;
-	}
-	public void setIdProjet(Long idProjet) {
-		this.idProjet = idProjet;
-	}
-	public Long getIdCollaborateur() {
-		return idCollaborateur;
-	}
-	public void setIdCollaborateur(Long idCollaborateur) {
-		this.idCollaborateur = idCollaborateur;
-	}*/
 	public Boolean getEtatIntervention() {
 		return etatIntervention;
 	}
 	public void setEtatIntervention(Boolean etatIntervention) {
 		this.etatIntervention = etatIntervention;
 	}
+	public List<Note> getNotes() {
+		return notes;
+	}
+	public void setNotes(List<Note> notes) {
+		this.notes = notes;
+	}
+	
 	
 	
 	

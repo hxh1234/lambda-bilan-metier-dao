@@ -13,6 +13,5 @@ import com.lambda.bilan.entities.Objectif;
 
 public interface ObjectifDAO extends CrudRepository<Objectif, Long> {
 	
-	public List<Objectif> findByCollaborateurAndDateCreationObjectifBetween(Collaborateur collaborateur, Date dateDebut,Date dateFin);
-	//public List<Objectif> findBy
+	public List<Objectif> findByCollaborateurAndDateCreationObjectifBetween(Collaborateur collaborateur, Date dateDebut,Date dateFin)  throws Exception;
 }

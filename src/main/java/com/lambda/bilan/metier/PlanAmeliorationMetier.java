@@ -14,6 +14,8 @@ import com.lambda.bilan.entities.Action;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.PlanFormation;
 import com.lambda.bilan.helpers.DateHelper;
+import com.lambda.bilan.helpers.LambdaException;
+import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service
 @Transactional
@@ -26,18 +28,27 @@ public class PlanAmeliorationMetier implements IPlanAmeliorationMetier {
 
 
 	@Override
-	public PlanAmelioration getPlanAmeliorationOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) {
-		List<PlanFormation> planFormations; 
-		List<Action> actions;
-		planFormations=planFormationDAO.findByObjectifs_dateCreationObjectifBetweenAndObjectifs_Collaborateur(dateBAP, DateHelper.datePlus11Month(dateBAP), collaborateur);
-		actions=actionDAO.findByDateActionBetweenAndCollaborateur(dateBAP, DateHelper.datePlus11Month(dateBAP), collaborateur);	
-		return new PlanAmelioration(planFormations, actions);
+	public PlanAmelioration getPlanAmeliorationOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP)throws LambdaException {
+		try {
+			List<PlanFormation> planFormations; 
+			List<Action> actions;
+			planFormations= planFormationDAO.findByObjectifs_dateCreationObjectifBetweenAndObjectifs_Collaborateur(DateHelper.dateSubtractYear(dateBAP), dateBAP, collaborateur);
+			actions=actionDAO.findByDateActionBetweenAndCollaborateur(DateHelper.dateSubtractYear(dateBAP),dateBAP, collaborateur);	
+			return new PlanAmelioration(planFormations, actions);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("planAmelioration.load.fail"));
+		}
 	}
 
 	@Override
-	public void addPlanAmelioration(PlanAmelioration planAmelioration) {
-		planFormationDAO.save(planAmelioration.getPlanFormations());
+	public void addPlanAmelioration(PlanAmelioration planAmelioration) throws LambdaException {
+		try {
+			planFormationDAO.save(planAmelioration.getPlanFormations());
 		actionDAO.save(planAmelioration.getActions());
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("planAmelioration.add.fail"));
+		}
+		
 	}
 
 }

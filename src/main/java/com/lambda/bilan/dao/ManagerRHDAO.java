@@ -11,5 +11,5 @@ import com.lambda.bilan.entities.ManagerRH;
 
 public interface ManagerRHDAO extends CrudRepository<ManagerRH, Long> {
 	@Query("select c from Collaborateur c where c.managerRH.idUtilisateur=?1")
-	List<Collaborateur> getAll(Long id);
+	List<Collaborateur> getAll(Long id) throws Exception;
 }

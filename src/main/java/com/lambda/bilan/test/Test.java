@@ -8,21 +8,30 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.aries.blueprint.proxy.Collaborator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.lambda.bilan.dao.ActionDAO;
 import com.lambda.bilan.dao.CollaborateurDAO;
 import com.lambda.bilan.dao.InterventionDAO;
 import com.lambda.bilan.dao.ObjectifDAO;
 import com.lambda.bilan.dao.PlanFormationDAO;
+import com.lambda.bilan.dao.ProjetDAO;
 import com.lambda.bilan.entities.Collaborateur;
+import com.lambda.bilan.entities.Evaluateur;
 import com.lambda.bilan.entities.Intervention;
 import com.lambda.bilan.entities.Objectif;
 import com.lambda.bilan.entities.PlanFormation;
+import com.lambda.bilan.entities.Projet;
+import com.lambda.bilan.metier.IProjetMetier;
+import com.lambda.bilan.metier.ProjetMetier;
 
 @Service
+@Transactional
 public class Test {
 
 	@Autowired
@@ -35,7 +44,9 @@ public class Test {
 	ActionDAO actionDAO;
 	@Autowired
 	CollaborateurDAO collaborateurDAO;
-
+	@Autowired
+	ProjetDAO projetDAO;
+/*
 	public List<Intervention> findByDateFinInterventionBetweenAndCollaborateur() throws ParseException{
 		Collaborateur collaborateur=new Collaborateur();
 		collaborateur.setIdUtilisateur(2L);
@@ -105,9 +116,7 @@ public class Test {
 		
 		return collaborateurDAO.getAllCollaborateurWithoutProject();
 	}
-	public List<Collaborateur> getAllCollaborateurOfManagerRH(){
-		return collaborateurDAO.getAllCollaborateurOfManagerRH(1L);
-	}
+	
 	
 	public List<Intervention> getTopIntervention(){
 		return interventionDAO.findTop6ByDateFinInterventionLessThanOrderByDateFinInterventionDesc(new Date());
@@ -124,7 +133,16 @@ public class Test {
 	
 	
 	
+
+	
+	*/
+	/*public List<Collaborateur> getAllCollaborateurOfManagerRH(){
+	return collaborateurDAO.getAllCollaborateurOfManagerRH(1L);
+}*/
+	
+	
 	/******Utile*********/
+	/*
 	private Date dateBAPthisYear(Collaborateur collaborateur){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String dateInString;
@@ -153,6 +171,16 @@ public class Test {
 
 		return dateBAP;
 	}
+	
+	public List<Projet> findAllProjetOfCollaborateur(){
+		Evaluateur evaluateur=new Evaluateur();
+		evaluateur.setIdUtilisateur(10L);
+		return Lists.newArrayList(projetDAO.findAll());
+	}
+	
+	public List<Collaborateur> getAllCollaborateurWithoutObjectif(){
+		return collaborateurDAO.getAllCollaborateurWithoutObjectif();
+	}
 	private Date datePlus(Date date){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -160,4 +188,9 @@ public class Test {
 		date = cal.getTime();
 		return date;
 	}
+	*/
+	/////////////////////////
+	
+	
+	
 }

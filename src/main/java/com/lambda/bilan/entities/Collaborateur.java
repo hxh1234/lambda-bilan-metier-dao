@@ -18,6 +18,8 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Temporal(TemporalType.DATE)
 	private Date dateEmbaucheCollaborateur;
+	@Temporal(TemporalType.DATE)
+	private Date dateDepartCollaborateur;
 	private String posteActuelCollaborateur;
 	private Boolean etatCollaborateur;
 	
@@ -26,10 +28,7 @@ public class Collaborateur extends Utilisateur implements Serializable{
     @JoinColumn(name = "idManagerRH")
 	private ManagerRH managerRH;
 	
-	// clé étrangère
-	//@Column(name = "idManagerRH", insertable = false, updatable = false)
-	//private Long idManagerRH;
-	
+
 	public Collaborateur() {
 		super();
 		this.etatCollaborateur=true;
@@ -58,13 +57,12 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	public void setManagerRH(ManagerRH managerRH) {
 		this.managerRH = managerRH;
 	}
-/*	public long getIdManagerRH() {
-		return idManagerRH;
+	public Date getDateDepartCollaborateur() {
+		return dateDepartCollaborateur;
 	}
-	public void setIdManagerRH(Long idManagerRH) {
-		this.idManagerRH = idManagerRH;
-	}*/
-	
-	
+	public void setDateDepartCollaborateur(Date dateDepartCollaborateur) {
+		this.dateDepartCollaborateur = dateDepartCollaborateur;
+	}
+		
 
 }

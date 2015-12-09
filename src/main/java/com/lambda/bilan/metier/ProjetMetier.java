@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.lambda.bilan.dao.ProjetDAO;
+import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Evaluateur;
 import com.lambda.bilan.entities.Projet;
+import com.lambda.bilan.helpers.LambdaException;
+import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Transactional
 @Service("Projet")
@@ -22,33 +25,68 @@ public class ProjetMetier implements IProjetMetier {
 	
 
 	@Override
-	public List<Projet> getAllProjet() {
-		return Lists.newArrayList(projetDAO.findAll());
+	public List<Projet> getAllProjet() throws LambdaException {
+		try {
+			return Lists.newArrayList(projetDAO.findAll());
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("projet.list.load.fail"));
+		}
+		
 	}
 
 	@Override
-	public void addProjet(Projet projet) {
-		projetDAO.save(projet);
+	public void addProjet(Projet projet) throws LambdaException {
+		try {
+			projetDAO.save(projet);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("projet.add.fail"));
+		}
 	}
 
 	@Override
-	public void updateProjet(Projet projet) {
-		projetDAO.save(projet);
+	public void updateProjet(Projet projet) throws LambdaException{
+		try {
+			projetDAO.save(projet);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("projet.update.fail"));
+		}
+		
 	}
 
 	@Override
-	public void deleteProjet(Long id) {
-		projetDAO.delete(id);
+	public void deleteProjet(Long id) throws LambdaException {
+		try {
+			projetDAO.delete(id);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("projet.delete.fail"));
+		}
 	}
 
 	@Override
-	public Projet getProjet(Long id) {
-		return projetDAO.findOne(id);
+	public Projet getProjet(Long id) throws LambdaException {
+		try {
+			return projetDAO.findOne(id);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("projet.id.notfound"));
+		}
 	}
 
 	@Override
-	public List<Projet> getAllProjetOfEvaluateur(Evaluateur evaluateur) {
-		return projetDAO.findAllByEvaluateur(evaluateur);
+	public List<Projet> getAllProjetOfEvaluateur(Evaluateur evaluateur) throws LambdaException{
+		try {
+			return projetDAO.findAllByEvaluateur(evaluateur);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("projet.list.load.fail"));
+		}
+	}
+
+	@Override
+	public List<Projet> getAllProjetOfCollaborateur(Collaborateur collaborateur) throws LambdaException {
+		try {
+			return projetDAO.getAllProjetOfCollaborateur(collaborateur);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("projet.list.load.fail"));
+		}
 	}
 
 }

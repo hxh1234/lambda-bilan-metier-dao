@@ -1,7 +1,6 @@
 package com.lambda.bilan.metier;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,33 +14,32 @@ import com.lambda.bilan.domain.FeedBack;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Intervention;
 import com.lambda.bilan.entities.Note;
+import com.lambda.bilan.helpers.DateHelper;
+import com.lambda.bilan.helpers.LambdaException;
+import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service("FeedBack")
 @Transactional
 public class FeedBackMetier implements IFeedBackMetier {
 
 	@Autowired
-	private NoteDAO noteDAO;
-	@Autowired
 	private InterventionDAO interventionDAO;
+	@Autowired
+	private NoteDAO noteDAO;
 
 	@Override
-	public List<FeedBack> getAllfeedBackOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) {
-		if(collaborateur==null || dateBAP==null){
-			return null;
-		}
-		else{
+	public List<FeedBack> getAllfeedBackOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP)  throws LambdaException {
+		try {
 			FeedBack feedBack;
-			Date dateDebut = dateBAP;
-			Date dateFin = datePlus(dateDebut);
+			Date dateDebut = DateHelper.dateSubtractYear(dateBAP);
+			Date dateFin = dateBAP;
 			List<Note> notes;
 			List<FeedBack> feedBacks = new ArrayList<FeedBack>();
 			for(Intervention intervention : interventionDAO.findByDateFinInterventionBetweenAndCollaborateur(dateDebut, dateFin, collaborateur)){
 				feedBack=new FeedBack();
+				notes =new ArrayList<Note>();
 				feedBack.setIntervention(intervention);
-				notes = new ArrayList<Note>(noteDAO.findByIntervention(intervention));
-				//feedBack.setNotes(notes);
-
+				notes = intervention.getNotes();
 				int nbrThemeQualifies=0;
 				int totalePoids=0;
 				for (Note note : notes) {
@@ -52,32 +50,25 @@ public class FeedBackMetier implements IFeedBackMetier {
 				}
 				feedBack.setNbrThemeQualifies(nbrThemeQualifies);
 				feedBack.setTotalePoids(totalePoids);
+				feedBacks.add(feedBack);
 				feedBack.setNoteGlobale(totalePoids/nbrThemeQualifies);
 				nbrThemeQualifies=0;
 				totalePoids=0;
-
 			}
 			return feedBacks;
+
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("feedback.list.empty"));
 		}
 	}
 
-
 	@Override
-	public void addFeedBack(FeedBack feedBack) {
-		//noteDAO.save(//feedBack.getNotes());
+	public void addFeedBack(FeedBack feedBack) throws LambdaException {
+		try {
+			noteDAO.save(feedBack.getIntervention().getNotes());
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("feedback.add.fail"));
+		}	
 	}
-
-
-	/*
-	 * Methode utile
-	 */
-	private Date datePlus(Date dateDebut){
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(dateDebut);
-		cal.add(Calendar.MONTH, 11);
-		dateDebut = cal.getTime();
-		return dateDebut;
-	}
-
 
 }
