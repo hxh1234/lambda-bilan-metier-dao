@@ -44,7 +44,9 @@ public class BAPMetier implements IBAPMetier {
 					listBAP.add(bap);
 					date=DateHelper.dateAddtYear(date);
 				}
-				if(date.before(DateHelper.dateAddt11Month(date)))
+				Date datenow = new Date();
+				
+				if(datenow.before(DateHelper.dateSubtract11Month(date)))
 					listBAP.add(new BAP(new java.sql.Date(date.getTime()).toString(),STATUT_EN_ATTENT));
 				else
 					listBAP.add(new BAP(new java.sql.Date(date.getTime()).toString(),STATUT_EN_COURS));

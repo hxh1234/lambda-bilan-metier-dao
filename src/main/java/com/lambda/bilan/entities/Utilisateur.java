@@ -44,9 +44,10 @@ public class Utilisateur implements Serializable {
 	
 	public Utilisateur() {
 		super();
-		
 	}
-	
+	public Utilisateur(Long idUtilisateur) {
+		this.idUtilisateur=idUtilisateur;
+	}
 	
 	public Utilisateur(Long idUtilisateur, String urlPhotoUtilisateur, String passwordUtilisateur,
 			String telephoneUtilisateur, String sexeUtilisateur, String nomUtilisateur, String prenomUtilisateur,

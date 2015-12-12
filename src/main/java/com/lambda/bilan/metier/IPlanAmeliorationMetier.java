@@ -8,7 +8,7 @@ import com.lambda.bilan.helpers.LambdaException;
 
 public interface IPlanAmeliorationMetier {
 	
-	public PlanAmelioration getPlanAmeliorationOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) throws LambdaException;
+	public PlanAmelioration getPlanAmeliorationOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) throws LambdaException; // *
 	public void addPlanAmelioration(PlanAmelioration planAmelioration) throws LambdaException;
 
 }

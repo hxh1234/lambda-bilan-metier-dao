@@ -30,10 +30,6 @@ public class Note implements Serializable{
     @JoinColumn( name = "idQualification" )
 	private Qualification qualification;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn( name = "idIntervention" )
-	private Intervention intervention;
-	
 
 	private String remarqueNote;
 	
@@ -102,15 +98,6 @@ public class Note implements Serializable{
 	}
 	*/
 	
-	
-	public Intervention getIntervention() {
-		return intervention;
-	}
-
-	public void setIntervention(Intervention intervention) {
-		this.intervention = intervention;
-	}
-
 
 	
 }

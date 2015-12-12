@@ -47,6 +47,8 @@ public class ProjetMetier implements IProjetMetier {
 	@Override
 	public void updateProjet(Projet projet) throws LambdaException{
 		try {
+			if(projet.getIdProjet()==null)
+				throw new LambdaException(PropretiesHelper.getText("projet.update.fail"));
 			projetDAO.save(projet);
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("projet.update.fail"));

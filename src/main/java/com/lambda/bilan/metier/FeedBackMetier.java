@@ -43,14 +43,17 @@ public class FeedBackMetier implements IFeedBackMetier {
 				int nbrThemeQualifies=0;
 				int totalePoids=0;
 				for (Note note : notes) {
-					if(note.getQualification()!=null)
+					if(note.getQualification()!=null){
 						nbrThemeQualifies++;
-					else
 						totalePoids+=note.getQualification().getPoidsQualification();
+					}						
 				}
 				feedBack.setNbrThemeQualifies(nbrThemeQualifies);
 				feedBack.setTotalePoids(totalePoids);
 				feedBacks.add(feedBack);
+				if(nbrThemeQualifies==0)
+					feedBack.setNoteGlobale(0);
+				else
 				feedBack.setNoteGlobale(totalePoids/nbrThemeQualifies);
 				nbrThemeQualifies=0;
 				totalePoids=0;

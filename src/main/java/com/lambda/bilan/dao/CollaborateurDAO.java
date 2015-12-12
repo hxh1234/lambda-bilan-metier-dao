@@ -23,4 +23,6 @@ public interface CollaborateurDAO extends CrudRepository<Collaborateur, Long> {
 	
 	@Query("select c from Collaborateur c where c not in (select o.collaborateur from Objectif o)")
 	public List<Collaborateur> getAllCollaborateurWithoutObjectif() ;
+	
+	public List<Collaborateur> findByEtatCollaborateur(Boolean bool);
 }

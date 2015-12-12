@@ -1,6 +1,8 @@
 package com.lambda.bilan.test;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
@@ -14,17 +16,21 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.lambda.bilan.dao.CollaborateurDAO;
 import com.lambda.bilan.domain.BAP;
 import com.lambda.bilan.domain.FeedBack;
+import com.lambda.bilan.domain.PlanAmelioration;
+import com.lambda.bilan.entities.Action;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Evaluateur;
 import com.lambda.bilan.entities.Intervention;
 import com.lambda.bilan.entities.Objectif;
 import com.lambda.bilan.entities.PlanFormation;
 import com.lambda.bilan.entities.Projet;
+import com.lambda.bilan.entities.Utilisateur;
 import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.metier.IBAPMetier;
 import com.lambda.bilan.metier.IFeedBackMetier;
 import com.lambda.bilan.metier.IObjectifMetier;
+import com.lambda.bilan.metier.IPlanAmeliorationMetier;
 import com.lambda.bilan.metier.IProjetMetier;
 import com.lambda.bilan.metier.IUtilisateurMetier;
 import com.lambda.bilan.metier.ProjetMetier;
@@ -46,14 +52,41 @@ public class Boot {
 		ConfigurableApplicationContext context = app.run(args);
 		// métier
 		IUtilisateurMetier utilisateurMetier = context.getBean(IUtilisateurMetier.class);
-
+		IFeedBackMetier feedBackMetier =context.getBean(IFeedBackMetier.class);
+		IPlanAmeliorationMetier planAmeliorationMetier =context.getBean(IPlanAmeliorationMetier.class);
 		//
 		Test m = context.getBean(Test.class);
 		IProjetMetier projetMetier =context.getBean(IProjetMetier.class);
-		Collaborateur collaborateur=null;
+		Collaborateur collaborateur=new Collaborateur();
 		Evaluateur evaluateur=null;
 		try {
-			collaborateur=(Collaborateur) utilisateurMetier.getUtilisateur(2L);
+			collaborateur.setIdUtilisateur(2L);
+			collaborateur.setAdresseUtilisateur("qfsdgrd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String dateInString = "2015-12-01";
+			Date date = sdf.parse(dateInString);
+			
+			PlanAmelioration  planAmelioration = planAmeliorationMetier.getPlanAmeliorationOfCollaborateurByYear(collaborateur, date);
+			
+			List<Action> actions = planAmelioration.getActions();
+			for (Action action : actions) {
+				System.out.println(action.getObjetAction());
+			}
+			//Utilisateur utilisateur = new Utilisateur();
+			//utilisateur.setNomUtilisateur("bao3bo3");
+			//Collaborateur collaborateur2 = utilisateur;
+			//System.out.println(collaborateur2.getClass());
+			//utilisateurMetier.addUtilisateur(collaborateur2);
+			//Collaborateur utilisateur= (Collaborateur) utilisateurMetier.getUtilisateur(2L);
+			//utilisateur.setIdUtilisateur(2L);
+			//utilisateur.setAdresseUtilisateur("darna");
+			//utilisateurMetier.updateUtilisateur(utilisateur);
+			//collaborateur=(Collaborateur) utilisateurMetier.getUtilisateur(2L);
+			
+			//collaborateur.setIdUtilisateur(2L);
+			//collaborateur.setAdresseUtilisateur("baaaaaaa3");
+			//collaborateur.setNomUtilisateur("ALi Masaaf");
+			//utilisateurMetier.updateUtilisateur(collaborateur);
 			//System.out.println(collaborateur.getNomUtilisateur()+"    "+DateHelper.dateBAPthisYear(collaborateur));
 			evaluateur=(Evaluateur) utilisateurMetier.getUtilisateur(10L);
 		} catch (Exception e1) {

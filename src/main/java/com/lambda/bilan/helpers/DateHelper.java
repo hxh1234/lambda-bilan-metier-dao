@@ -64,11 +64,11 @@ public class DateHelper {
 		}
 	}
 
-	public static Date dateAddt11Month(Date date) throws Exception{
+	public static Date dateSubtract11Month(Date date) throws Exception{
 		try {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
-			cal.add(Calendar.MONTH, 12);
+			cal.add(Calendar.MONTH, -11);
 			date = cal.getTime();
 			return date;
 		} catch (Exception e) {

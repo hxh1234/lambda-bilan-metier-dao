@@ -36,7 +36,7 @@ public class Intervention implements Serializable{
 	private Boolean etatIntervention;
 	
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
-	@JoinColumn(name="idObjectif")
+	@JoinColumn(name="idIntervention")
 	private List<Note> notes;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

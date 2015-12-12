@@ -21,7 +21,7 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dateDepartCollaborateur;
 	private String posteActuelCollaborateur;
-	private Boolean etatCollaborateur;
+	private Boolean etatCollaborateur=true;
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -31,6 +31,9 @@ public class Collaborateur extends Utilisateur implements Serializable{
 
 	public Collaborateur() {
 		super();
+	}
+	public Collaborateur(Long id) {
+		super(id);
 		this.etatCollaborateur=true;
 	}
 	public Date getDateEmbaucheCollaborateur() {

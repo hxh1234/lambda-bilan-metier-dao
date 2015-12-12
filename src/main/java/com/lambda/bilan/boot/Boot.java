@@ -32,7 +32,7 @@ import com.lambda.bilan.metier.GoogleAgendaMetier;
 public class Boot {
 
     public static void main(String[] args) {
-    	//SpringApplication.run(Boot.class, args);
+    	SpringApplication.run(Boot.class, args);
     	/*GoogleAgendaThread metier = SpringApplication.run(Boot.class, args).getBean(GoogleAgendaThread.class);
     	List<String> list = new ArrayList<String>();
     	list.add("lambda.bilan@gmail.com");
