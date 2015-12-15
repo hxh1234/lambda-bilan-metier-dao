@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @DiscriminatorValue( "COLLABORATEUR" )
@@ -60,9 +61,11 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	public void setEtatCollaborateur(Boolean etatCollaborateur) {
 		this.etatCollaborateur = etatCollaborateur;
 	}
+	@JsonIgnore
 	public ManagerRH getManagerRH() {
 		return managerRH;
 	}
+	@JsonProperty
 	public void setManagerRH(ManagerRH managerRH) {
 		this.managerRH = managerRH;
 	}
