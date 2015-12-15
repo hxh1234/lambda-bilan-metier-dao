@@ -3,6 +3,7 @@ package com.lambda.bilan.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Action implements Serializable{
@@ -26,11 +29,12 @@ public class Action implements Serializable{
 	private String messageAction;
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
+	@JsonIgnore
 	private Collaborateur collaborateur;
 	
-	// clé étrangère
-	//@Column(name = "idCollaborateur", insertable = false, updatable = false)
-	//private Long idCollaborateur;
+	//clé étrangère
+	@Column(name = "idCollaborateur", insertable = false, updatable = false)
+	private Long idCollaborateur;
 	
 	public Action() {
 		super();
@@ -42,12 +46,12 @@ public class Action implements Serializable{
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
 	}
-	/*public Long getIdCollaborateur() {
+	public Long getIdCollaborateur() {
 		return idCollaborateur;
 	}
 	public void setIdCollaborateur(Long idCollaborateur) {
 		this.idCollaborateur = idCollaborateur;
-	}*/
+	}
 	private String objetAction;
 	
 	

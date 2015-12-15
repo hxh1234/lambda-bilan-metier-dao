@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -35,23 +38,25 @@ public class Intervention implements Serializable{
 	private String roleJoue;
 	private Boolean etatIntervention;
 	
-	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="idIntervention")
 	private List<Note> notes;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProjet")
+	@JsonIgnore
 	private Projet projet;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
+	@JsonIgnore
 	private Collaborateur collaborateur;
 	
-	/* clé étrangères
+	//clé étrangères
 	@Column(name = "idProjet", insertable = false, updatable = false)
 	private Long idProjet;
 	@Column(name = "idCollaborateur", insertable = false, updatable = false)
-	private Long idCollaborateur;*/
+	private Long idCollaborateur;
 	
 	
 	public Intervention() {
@@ -124,6 +129,19 @@ public class Intervention implements Serializable{
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
 	}
+	public Long getIdProjet() {
+		return idProjet;
+	}
+	public void setIdProjet(Long idProjet) {
+		this.idProjet = idProjet;
+	}
+	public Long getIdCollaborateur() {
+		return idCollaborateur;
+	}
+	public void setIdCollaborateur(Long idCollaborateur) {
+		this.idCollaborateur = idCollaborateur;
+	}
+	
 	
 	
 	

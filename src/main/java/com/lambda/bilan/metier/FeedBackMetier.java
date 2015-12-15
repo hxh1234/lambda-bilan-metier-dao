@@ -18,6 +18,8 @@ import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
+import scala.collection.generic.BitOperations.Int;
+
 @Service("FeedBack")
 @Transactional(rollbackFor= LambdaException.class)
 public class FeedBackMetier implements IFeedBackMetier {
@@ -35,7 +37,8 @@ public class FeedBackMetier implements IFeedBackMetier {
 			Date dateFin = dateBAP;
 			List<Note> notes;
 			List<FeedBack> feedBacks = new ArrayList<FeedBack>();
-			for(Intervention intervention : interventionDAO.findByDateFinInterventionBetweenAndCollaborateur(dateDebut, dateFin, collaborateur)){
+			List<Intervention> interventions=interventionDAO.findByDateFinInterventionBetweenAndCollaborateur(dateDebut, dateFin, collaborateur);
+			for(Intervention intervention : interventions){
 				feedBack=new FeedBack();
 				notes =new ArrayList<Note>();
 				feedBack.setIntervention(intervention);

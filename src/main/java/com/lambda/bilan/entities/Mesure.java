@@ -2,6 +2,7 @@ package com.lambda.bilan.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -53,12 +54,12 @@ public class Mesure implements Serializable{
 	private ResponsableMesure responsableMesure;
 	
 	
-	/* clé étrangères
+	//clé étrangères
 	@Column(name = "idObjectif", insertable = false, updatable = false)
 	private Long idObjectif;
 	
 	@Column(name = "idResponsableMesure", insertable = false, updatable = false)
-	private Long idResponsableMesure;*/
+	private Long idResponsableMesure;
 	
 	
 	public Mesure() {

@@ -3,6 +3,7 @@ package com.lambda.bilan.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,10 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DiscriminatorValue( "COLLABORATEUR" )
 public class Collaborateur extends Utilisateur implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	@Temporal(TemporalType.DATE)
 	private Date dateEmbaucheCollaborateur;
@@ -22,13 +25,16 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	private Date dateDepartCollaborateur;
 	private String posteActuelCollaborateur;
 	private Boolean etatCollaborateur=true;
-	
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idManagerRH")
-	private ManagerRH managerRH;
-	
 
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idManagerRH")
+	@JsonIgnore
+	private ManagerRH managerRH;
+
+	// clé étrangère
+	@Column(name = "idManagerRH", insertable = false, updatable = false)
+	private Long idManagerRH;
 	public Collaborateur() {
 		super();
 	}
@@ -66,6 +72,13 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	public void setDateDepartCollaborateur(Date dateDepartCollaborateur) {
 		this.dateDepartCollaborateur = dateDepartCollaborateur;
 	}
-		
+	public Long getIdManagerRH() {
+		return idManagerRH;
+	}
+	public void setIdManagerRH(Long idManagerRH) {
+		this.idManagerRH = idManagerRH;
+	}
+	
+
 
 }

@@ -93,6 +93,14 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	}
 
 	@Override
+	public void updatePassword(String password, Long id) throws LambdaException {
+		try {
+				utilisateurDao.updatePassword(password, id);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.password.fail"));
+		}
+	}
+	@Override
 	public void deleteUtilisateur(Long id)throws LambdaException {
 		try {
 			utilisateurDao.delete(id);
@@ -161,5 +169,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.list.load.fail"));
 		}
 	}
+
+
 
 }

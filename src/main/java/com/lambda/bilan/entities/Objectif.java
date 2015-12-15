@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -44,6 +47,7 @@ public class Objectif implements Serializable{
 	}
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
+	@JsonIgnore
 	private Collaborateur collaborateur;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -69,7 +73,7 @@ public class Objectif implements Serializable{
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	/*public Long getIdCollaborateur() {
+	public Long getIdCollaborateur() {
 		return idCollaborateur;
 	}
 	public void setIdCollaborateur(Long idCollaborateur) {
@@ -80,15 +84,15 @@ public class Objectif implements Serializable{
 	}
 	public void setIdCategorie(Long idCategorie) {
 		this.idCategorie = idCategorie;
-	}*/
+	}
 
 	
-	/* clés étrangères
+	//clés étrangères
 	@Column(name = "idCollaborateur", insertable = false, updatable = false)
 	private Long idCollaborateur;
 	
 	@Column(name = "idCategorie", insertable = false, updatable = false)
-	private Long idCategorie;*/
+	private Long idCategorie;
 	
 	public Objectif() {
 		super();

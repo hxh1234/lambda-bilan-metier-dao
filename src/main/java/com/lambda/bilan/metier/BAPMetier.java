@@ -51,22 +51,6 @@ public class BAPMetier implements IBAPMetier {
 				else
 					listBAP.add(new BAP(new java.sql.Date(date.getTime()).toString(),STATUT_EN_COURS));
 			}
-			return listBAP;
-		} catch (Exception e) {
-			throw new LambdaException(PropretiesHelper.getText("general.list.load.fail"));
-		}
-	}
-
-
-	@Override
-	public List<BAP> getAllBAPOfCollaborateurParti(Long idCollaborateur) throws LambdaException {
-		try {
-			BAP bap=null;
-			List<BAP> listBAP=new ArrayList<BAP>();
-			Collaborateur collaborateur= collaborateurDAO.findOne(idCollaborateur);
-			Date dateEmbauche =collaborateur.getDateEmbaucheCollaborateur();
-			Date dateBAPThisYear =DateHelper.dateBAPthisYear(collaborateur);
-			Date date=DateHelper.dateAddtYear(dateEmbauche);
 			if(collaborateur.getEtatCollaborateur()==false && collaborateur.getDateDepartCollaborateur()!=null){
 				while(date.before(dateBAPThisYear) && date.before(collaborateur.getDateDepartCollaborateur())){
 					bap=new BAP(new java.sql.Date(date.getTime()).toString(),STATUT_VALIDE);
