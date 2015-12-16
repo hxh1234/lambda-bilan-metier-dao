@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
@@ -105,15 +106,19 @@ public class Intervention implements Serializable{
 	public void setRoleJoue(String roleJoue) {
 		this.roleJoue = roleJoue;
 	}
+	@JsonIgnore
 	public Projet getProjet() {
 		return projet;
 	}
+	@JsonProperty
 	public void setProjet(Projet projet) {
 		this.projet = projet;
 	}
+	@JsonIgnore
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
 	}
+	@JsonProperty
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
 	}

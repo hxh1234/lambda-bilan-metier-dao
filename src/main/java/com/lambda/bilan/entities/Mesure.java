@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Mesure implements Serializable{
 	
@@ -23,7 +26,10 @@ public class Mesure implements Serializable{
 	private Integer poidsMesure;
 	private Integer resultatMesure;
 	private Boolean modeAccesMesure;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idObjectif")
+	@JsonIgnore
+	private Objectif objectif;
 	
 	
 	public Mesure(Long idMesure, String commentMesurer) {
@@ -37,13 +43,13 @@ public class Mesure implements Serializable{
 	public void setResponsableMesure(ResponsableMesure responsableMesure) {
 		this.responsableMesure = responsableMesure;
 	}
-	/*public Long getIdObjectif() {
+	public Long getIdObjectif() {
 		return idObjectif;
 	}
 	public void setIdObjectif(Long idObjectif) {
 		this.idObjectif = idObjectif;
 	}
-	public Long getIdResponsableMesure() {
+	/*public Long getIdResponsableMesure() {
 		return idResponsableMesure;
 	}
 	public void setIdResponsableMesure(Long idResponsableMesure) {
@@ -57,10 +63,10 @@ public class Mesure implements Serializable{
 	//clé étrangères
 	@Column(name = "idObjectif", insertable = false, updatable = false)
 	private Long idObjectif;
-	
+	/*
 	@Column(name = "idResponsableMesure", insertable = false, updatable = false)
 	private Long idResponsableMesure;
-	
+	*/
 	
 	public Mesure() {
 		super();
@@ -95,6 +101,14 @@ public class Mesure implements Serializable{
 	}
 	public void setModeAccesMesure(Boolean modeAccesMesure) {
 		this.modeAccesMesure = modeAccesMesure;
+	}
+	@JsonIgnore
+	public Objectif getObjectif() {
+		return objectif;
+	}
+	@JsonProperty
+	public void setObjectif(Objectif objectif) {
+		this.objectif = objectif;
 	}
 
 	

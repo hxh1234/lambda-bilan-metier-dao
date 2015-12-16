@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.api.client.util.Lists;
+import com.lambda.bilan.dao.CategorieDAO;
 import com.lambda.bilan.dao.ObjectifDAO;
 import com.lambda.bilan.domain.FicheObjectifs;
+import com.lambda.bilan.entities.Categorie;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Mesure;
 import com.lambda.bilan.entities.Objectif;
@@ -24,12 +27,13 @@ public class ObjectifMetier implements IObjectifMetier{
 
 	@Autowired
 	private ObjectifDAO objectifDAO;
-
+	@Autowired
+	private CategorieDAO categorieDAO;
 
 	@Override
-	public void addObjectif(Objectif objectif) throws LambdaException {
+	public void addObjectif(List<Objectif> objectifs) throws LambdaException {
 		try {
-			objectifDAO.save(objectif);	
+			objectifDAO.save(objectifs);	
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("objectif.add.fail"));
 		}	
@@ -90,6 +94,17 @@ public class ObjectifMetier implements IObjectifMetier{
 			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));
 		}	
 	}
+	
+	@Override
+	public List<Objectif> getAllObjectifsRefusFromCollaborateurOfManagerRH(Long id) throws LambdaException {
+		try {
+			System.out.println("hiii");
+			return objectifDAO.getAllObjectifsRefusFromCollaborateurOfManagerRH(id);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));
+		}	
+	}
 
 	@Override
 	public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP)  throws LambdaException{
@@ -107,10 +122,13 @@ public class ObjectifMetier implements IObjectifMetier{
 		}
 	}
 
-
-
-
-
-
-
+	@Override
+	public List<Categorie> getAllCategorie() throws LambdaException {
+		try {
+			return Lists.newArrayList(categorieDAO.findAll());
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("categorie.list.load.fail"));
+		}
+		
+	}
 }

@@ -9,7 +9,7 @@ import com.lambda.bilan.helpers.LambdaException;
 
 public interface IProjetMetier {
 	
-	public void addProjet(Projet projet )  throws LambdaException;
+	public void addProjet(Projet projet)  throws LambdaException;
 	public void updateProjet(Projet projet )  throws LambdaException;
 	public void deleteProjet(Long id)  throws LambdaException;
 	public Projet getProjet(Long id) throws LambdaException;

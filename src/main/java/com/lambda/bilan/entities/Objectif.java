@@ -30,10 +30,10 @@ public class Objectif implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idObjectif;
 	@Temporal(TemporalType.DATE)
-	private Date dateCreationObjectif;
+	private Date dateCreationObjectif=new Date();
 	private String nomObjectif;
 	private String descriptifObjectif;
-	private String statutObjectif;
+	private String statutObjectif="validé";
 	
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="idObjectif")
@@ -45,9 +45,8 @@ public class Objectif implements Serializable{
 		this.nomObjectif = nomObjectif;
 		this.mesures = mesures;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCollaborateur")
-	@JsonIgnore
 	private Collaborateur collaborateur;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

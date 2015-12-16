@@ -21,9 +21,9 @@ public class InterventionMetier implements IInterventionMetier {
 
 
 	@Override
-	public void assignProjet(Intervention intervention) throws LambdaException {
+	public void assignProjet(List<Intervention> interventions) throws LambdaException {
 		try {
-			interventionDAO.save(intervention);
+			interventionDAO.save(interventions);
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("intervention.add.fail"));
 		}
