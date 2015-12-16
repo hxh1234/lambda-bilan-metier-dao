@@ -32,6 +32,15 @@ public class ObjectifMetier implements IObjectifMetier{
 	private CategorieDAO categorieDAO;
 
 	@Override
+	public void addObjectif(Objectif objectif) throws LambdaException {
+		try {
+			objectifDAO.save(objectif);	
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("objectif.add.fail"));
+		}	
+	}
+	
+	@Override
 	public void addObjectif(List<Objectif> objectifs) throws LambdaException {
 		try {
 			objectifDAO.save(objectifs);	
@@ -43,8 +52,6 @@ public class ObjectifMetier implements IObjectifMetier{
 	@Override
 	public void updateObjectif(Objectif objectif) throws LambdaException {
 		try {
-			objectif.setStatutObjectif(StatutObjectif.VALIDER.toString());
-			objectif.setDateCreationObjectif(new Date());
 			objectifDAO.updateObjectif(objectif.getIdObjectif(),objectif.getNomObjectif(), objectif.getDescriptifObjectif(), objectif.getCategorie().getIdCategorie());
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("objectif.update.fail"));

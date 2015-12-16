@@ -10,18 +10,19 @@ import com.lambda.bilan.entities.Objectif;
 import com.lambda.bilan.helpers.LambdaException;
 
 public interface IObjectifMetier {
-		
-		public void addObjectif(List<Objectif> objectifs) throws LambdaException;
-		public void updateObjectif(Objectif objectif) throws LambdaException;
-		public void deleteObjectif(Long id) throws LambdaException;
-		public Objectif getObjectif(Long id) throws LambdaException;
-		public void updateObjectifs(List<Objectif> objectifs) throws LambdaException;
-		public void validerObjectif(Long id) throws LambdaException;
-		public void refuserObjectif(Long id) throws LambdaException;
-		
-		public List<Objectif> getAllObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP) throws LambdaException;
-		public List<Objectif> getAllObjectifsOfCollaborateurThisYear(Collaborateur collaborateur) throws LambdaException;
-		public List<Objectif> getAllObjectifsRefusFromCollaborateurOfManagerRH(Long id) throws LambdaException;
-		public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP) throws LambdaException;
-		public List<Categorie> getAllCategorie() throws LambdaException;
+
+	public void addObjectif(Objectif objectif) throws LambdaException;
+	public void addObjectif(List<Objectif> objectifs) throws LambdaException;
+	public void updateObjectif(Objectif objectif) throws LambdaException;
+	public void deleteObjectif(Long id) throws LambdaException;
+	public Objectif getObjectif(Long id) throws LambdaException;
+	public void updateObjectifs(List<Objectif> objectifs) throws LambdaException;
+	public void validerObjectif(Long id) throws LambdaException;
+	public void refuserObjectif(Long id) throws LambdaException;
+
+	public List<Objectif> getAllObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP) throws LambdaException;
+	public List<Objectif> getAllObjectifsOfCollaborateurThisYear(Collaborateur collaborateur) throws LambdaException;
+	public List<Objectif> getAllObjectifsRefusFromCollaborateurOfManagerRH(Long id) throws LambdaException;
+	public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP) throws LambdaException;
+	public List<Categorie> getAllCategorie() throws LambdaException;
 }

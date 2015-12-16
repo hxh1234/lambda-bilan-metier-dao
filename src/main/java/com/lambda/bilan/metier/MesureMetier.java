@@ -35,6 +35,7 @@ public class MesureMetier implements IMesureMetier {
 			Collaborateur collaborateur = objectif.getCollaborateur();
 			Date dateBAP =DateHelper.dateBAPthisYear(collaborateur);
 			Integer poids=0;
+			//AllObjectifsOfCollaborateurThisYear
 			List<Objectif> objectifs= objectifDAO.findByCollaborateurAndDateCreationObjectifBetweenAndStatutObjectif(collaborateur, DateHelper.dateSubtractYear(dateBAP), dateBAP,StatutObjectif.VALIDER.toString());
 			for (Objectif obj : objectifs) {
 				if(obj.getMesures()!=null){
@@ -56,6 +57,16 @@ public class MesureMetier implements IMesureMetier {
 			throw new LambdaException(PropretiesHelper.getText("mesure.add.fail"));
 		}
 
+	}
+	
+	@Override
+	public void addMesure(List<Mesure> mesures) throws LambdaException {
+		try {
+			System.out.println("add liste");
+			mesureDAO.save(mesures);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("mesure.add.fail"));
+		}
 	}
 
 	@Override
