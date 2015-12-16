@@ -45,7 +45,7 @@ public class ObjectifMetier implements IObjectifMetier{
 		try {
 			objectif.setStatutObjectif(StatutObjectif.VALIDER.toString());
 			objectif.setDateCreationObjectif(new Date());
-			objectifDAO.save(objectif);
+			objectifDAO.updateObjectif(objectif.getIdObjectif(),objectif.getNomObjectif(), objectif.getDescriptifObjectif(), objectif.getCategorie().getIdCategorie());
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("objectif.update.fail"));
 		}		

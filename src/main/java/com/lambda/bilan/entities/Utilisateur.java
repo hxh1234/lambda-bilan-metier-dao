@@ -15,6 +15,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 @Entity
@@ -29,6 +32,7 @@ public class Utilisateur implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUtilisateur;	
 	private String urlPhotoUtilisateur;
+	@JsonIgnore
 	private String passwordUtilisateur;
 	private String telephoneUtilisateur;
 	private String sexeUtilisateur;
@@ -72,10 +76,11 @@ public class Utilisateur implements Serializable {
 	public void setIdUtilisateur(Long idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
-
+	@JsonIgnore
 	public String getPasswordUtilisateur() {
 		return passwordUtilisateur;
 	}
+	@JsonProperty
 	public void setPasswordUtilisateur(String passwordUtilisateur) {
 		this.passwordUtilisateur = passwordUtilisateur;
 	}
