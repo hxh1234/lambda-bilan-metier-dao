@@ -29,7 +29,7 @@ public class PlanFormation implements Serializable{
 	}
 	private String moyensPlanFormation;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="objectif_planFormation",
 	joinColumns={@JoinColumn(name="idPlanFormation")},
 	inverseJoinColumns={@JoinColumn(name="idObjectif")})

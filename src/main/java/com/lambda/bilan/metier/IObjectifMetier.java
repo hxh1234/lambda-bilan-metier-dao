@@ -16,6 +16,8 @@ public interface IObjectifMetier {
 		public void deleteObjectif(Long id) throws LambdaException;
 		public Objectif getObjectif(Long id) throws LambdaException;
 		public void updateObjectifs(List<Objectif> objectifs) throws LambdaException;
+		public void validerObjectif(Long id) throws LambdaException;
+		public void refuserObjectif(Long id) throws LambdaException;
 		
 		public List<Objectif> getAllObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP) throws LambdaException;
 		public List<Objectif> getAllObjectifsOfCollaborateurThisYear(Collaborateur collaborateur) throws LambdaException;

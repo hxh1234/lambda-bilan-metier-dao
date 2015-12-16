@@ -19,6 +19,7 @@ import com.lambda.bilan.entities.Objectif;
 import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
+import com.lambda.bilan.helpers.StatutObjectif;
 
 
 @Transactional(rollbackFor= LambdaException.class)
@@ -42,6 +43,8 @@ public class ObjectifMetier implements IObjectifMetier{
 	@Override
 	public void updateObjectif(Objectif objectif) throws LambdaException {
 		try {
+			objectif.setStatutObjectif(StatutObjectif.VALIDER.toString());
+			objectif.setDateCreationObjectif(new Date());
 			objectifDAO.save(objectif);
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("objectif.update.fail"));
@@ -77,9 +80,33 @@ public class ObjectifMetier implements IObjectifMetier{
 	}
 
 	@Override
+	public void validerObjectif(Long id) throws LambdaException {
+		try {
+			objectifDAO.validerObjectif(id);
+		} catch (Exception  e) {
+			throw new LambdaException(PropretiesHelper.getText("objectif.update.fail"));
+		}
+
+	}
+
+	@Override
+	public void refuserObjectif(Long id) throws LambdaException {
+		try {
+			Objectif objectif = objectifDAO.findOne(id);
+			Integer compteur = objectif.getCompteurRejet()+1;
+			if (compteur>3)
+				throw new LambdaException(PropretiesHelper.getText("objectif.rejet.fail"));
+			else
+				objectifDAO.refuserObjectif(compteur,id);
+		} catch (Exception  e) {
+			throw new LambdaException(PropretiesHelper.getText("objectif.rejet.fail"));
+		}
+	}
+
+	@Override
 	public List<Objectif> getAllObjectifsOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP) throws LambdaException{
 		try {
-			return objectifDAO.findByCollaborateurAndDateCreationObjectifBetween(collaborateur,DateHelper.dateSubtractYear(dateBAP) , dateBAP);
+			return objectifDAO.findByCollaborateurAndDateCreationObjectifBetweenAndStatutObjectif(collaborateur,DateHelper.dateSubtractYear(dateBAP) , dateBAP,StatutObjectif.VALIDER.toString());
 		}catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));
 		}
@@ -89,12 +116,12 @@ public class ObjectifMetier implements IObjectifMetier{
 	public List<Objectif> getAllObjectifsOfCollaborateurThisYear(Collaborateur collaborateur) throws LambdaException {
 		try {
 			Date dateBAP =DateHelper.dateBAPthisYear(collaborateur);
-			return objectifDAO.findByCollaborateurAndDateCreationObjectifBetween(collaborateur, DateHelper.dateSubtractYear(dateBAP), dateBAP);
+			return objectifDAO.findByCollaborateurAndDateCreationObjectifBetweenAndStatutObjectif(collaborateur, DateHelper.dateSubtractYear(dateBAP), dateBAP,StatutObjectif.VALIDER.toString());
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));
 		}	
 	}
-	
+
 	@Override
 	public List<Objectif> getAllObjectifsRefusFromCollaborateurOfManagerRH(Long id) throws LambdaException {
 		try {
@@ -109,7 +136,7 @@ public class ObjectifMetier implements IObjectifMetier{
 	@Override
 	public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP)  throws LambdaException{
 		try {
-			List<Objectif> objectifs = objectifDAO.findByCollaborateurAndDateCreationObjectifBetween(collaborateur,  DateHelper.dateSubtractYear(dateBAP),dateBAP);
+			List<Objectif> objectifs = objectifDAO.findByCollaborateurAndDateCreationObjectifBetweenAndStatutObjectif(collaborateur,  DateHelper.dateSubtractYear(dateBAP),dateBAP,StatutObjectif.VALIDER.toString());
 			long noteFinal=0;
 			for (Objectif objectif : objectifs) {
 				for (Mesure mesure : objectif.getMesures()) {
@@ -129,6 +156,7 @@ public class ObjectifMetier implements IObjectifMetier{
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("categorie.list.load.fail"));
 		}
-		
+
 	}
+
 }

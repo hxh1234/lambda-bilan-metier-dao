@@ -23,9 +23,8 @@ public class Projet implements Serializable{
 	private Long idProjet;
 	private String nomProjet;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idEvaluateur")
-	@JsonIgnore
 	private Evaluateur evaluateur;
 
 	// clé étrangère

@@ -34,6 +34,7 @@ public class Objectif implements Serializable{
 	private String nomObjectif;
 	private String descriptifObjectif;
 	private String statutObjectif="validé";
+	private Integer compteurRejet=0;
 	
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="idObjectif")
@@ -126,6 +127,12 @@ public class Objectif implements Serializable{
 	}
 	public void setDescriptifObjectif(String descriptifObjectif) {
 		this.descriptifObjectif = descriptifObjectif;
+	}
+	public Integer getCompteurRejet() {
+		return compteurRejet;
+	}
+	public void setCompteurRejet(Integer compteurRejet) {
+		this.compteurRejet = compteurRejet;
 	}
 	
 
