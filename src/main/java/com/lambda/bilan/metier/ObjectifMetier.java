@@ -30,15 +30,6 @@ public class ObjectifMetier implements IObjectifMetier{
 	private ObjectifDAO objectifDAO;
 	@Autowired
 	private CategorieDAO categorieDAO;
-
-	@Override
-	public void addObjectif(Objectif objectif) throws LambdaException {
-		try {
-			objectifDAO.save(objectif);	
-		} catch (Exception e) {
-			throw new LambdaException(PropretiesHelper.getText("objectif.add.fail"));
-		}	
-	}
 	
 	@Override
 	public void addObjectif(List<Objectif> objectifs) throws LambdaException {

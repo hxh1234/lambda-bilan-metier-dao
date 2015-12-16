@@ -11,7 +11,6 @@ import com.lambda.bilan.helpers.LambdaException;
 
 public interface IObjectifMetier {
 
-	public void addObjectif(Objectif objectif) throws LambdaException;
 	public void addObjectif(List<Objectif> objectifs) throws LambdaException;
 	public void updateObjectif(Objectif objectif) throws LambdaException;
 	public void deleteObjectif(Long id) throws LambdaException;
