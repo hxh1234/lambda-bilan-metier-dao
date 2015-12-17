@@ -14,12 +14,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
 @Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"idProjet", "idCollaborateur"}))
 public class Intervention implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -32,8 +38,8 @@ public class Intervention implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dateFinIntervention;
 	private Integer nombreJoursValorises;
-	private String nomIntervention;
-	private String remarqueIntervention;
+	private String nomIntervention ="sans nom";
+	private String remarqueIntervention="sans remarque";
 	private String roleJoue;
 	private Boolean etatIntervention;
 	
@@ -43,10 +49,12 @@ public class Intervention implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProjet")
+	@JsonIgnore
 	private Projet projet;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
+	@JsonIgnore
 	private Collaborateur collaborateur;
 	
 	//clé étrangères
@@ -102,15 +110,19 @@ public class Intervention implements Serializable{
 	public void setRoleJoue(String roleJoue) {
 		this.roleJoue = roleJoue;
 	}
+	@JsonIgnore
 	public Projet getProjet() {
 		return projet;
 	}
+	@JsonProperty
 	public void setProjet(Projet projet) {
 		this.projet = projet;
 	}
+	@JsonIgnore
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
 	}
+	@JsonProperty
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
 	}

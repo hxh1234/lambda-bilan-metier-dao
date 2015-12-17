@@ -24,7 +24,6 @@ public class ProjetMetier implements IProjetMetier {
 	private ProjetDAO projetDAO;
 	
 	
-
 	@Override
 	public List<Projet> getAllProjet() throws LambdaException {
 		try {

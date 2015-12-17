@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"idIntervention", "idTheme"}))
 public class Note implements Serializable{
@@ -32,6 +35,11 @@ public class Note implements Serializable{
 	
 
 	private String remarqueNote;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idIntervention")
+	@JsonIgnore
+	private Intervention intervention;
 	
 	// clés étrangères
 	/*@Column(name = "idTheme", insertable = false, updatable = false)
@@ -97,6 +105,15 @@ public class Note implements Serializable{
 		this.idIntervention = idIntervention;
 	}
 	*/
+
+	@JsonIgnore
+	public Intervention getIntervention() {
+		return intervention;
+	}
+	@JsonProperty
+	public void setIntervention(Intervention intervention) {
+		this.intervention = intervention;
+	}
 	
 
 	

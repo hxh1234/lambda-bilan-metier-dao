@@ -7,7 +7,7 @@ import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.helpers.EmailThread;
 import com.lambda.bilan.helpers.MailModel;
 
-//@Service("Mail")
+//@Service("EMails")
 public class MailMetier implements IMailMetier {
 	private final static String TEMPLATE="template/mail-new-created-template.vm";
 	
@@ -16,10 +16,10 @@ public class MailMetier implements IMailMetier {
 	
 	@Override
 	public void sendMailNewCollaborateur(Collaborateur collaborateur) {
-		MailModel mailModel = new MailModel();
-		mailModel.addModel(collaborateur.getNomUtilisateur());
-		mailModel.addModel(collaborateur.getPasswordUtilisateur());
-		emailThread.setModel(mailModel);
+		MailModel model = new MailModel();
+		model.addModel(collaborateur.getNomUtilisateur());
+		model.addModel(collaborateur.getPasswordUtilisateur());
+		emailThread.setModel(model);
 		emailThread.setEmail(collaborateur.getEmailUtilisateur());
 		emailThread.setTemplate(TEMPLATE);
 		emailThread.start();

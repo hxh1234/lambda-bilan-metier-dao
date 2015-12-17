@@ -123,10 +123,8 @@ public class ObjectifMetier implements IObjectifMetier{
 	@Override
 	public List<Objectif> getAllObjectifsRefusFromCollaborateurOfManagerRH(Long id) throws LambdaException {
 		try {
-			System.out.println("hiii");
 			return objectifDAO.getAllObjectifsRefusFromCollaborateurOfManagerRH(id);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));
 		}	
 	}
@@ -135,12 +133,13 @@ public class ObjectifMetier implements IObjectifMetier{
 	public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP)  throws LambdaException{
 		try {
 			List<Objectif> objectifs = objectifDAO.findByCollaborateurAndDateCreationObjectifBetweenAndStatutObjectif(collaborateur,  DateHelper.dateSubtractYear(dateBAP),dateBAP,StatutObjectif.VALIDER.toString());
-			long noteFinal=0;
+			Float noteFinal=0.0F;
 			for (Objectif objectif : objectifs) {
 				for (Mesure mesure : objectif.getMesures()) {
-					noteFinal+=mesure.getResultatMesure();
+					noteFinal+=mesure.getResultatMesure()*mesure.getPoidsMesure();
 				}
 			}	
+			noteFinal/=100;
 			return new FicheObjectifs(objectifs, noteFinal);
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));

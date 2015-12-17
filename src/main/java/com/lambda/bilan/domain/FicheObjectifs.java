@@ -7,13 +7,13 @@ import com.lambda.bilan.entities.Objectif;
 public class FicheObjectifs {
 
 	private List<Objectif> objectifs;
-	private long noteFinal;
+	private Float noteFinal;
 	
 	public FicheObjectifs() {
 		super();
 	}
 	
-	public FicheObjectifs(List<Objectif> objectifs, long noteFinal) {
+	public FicheObjectifs(List<Objectif> objectifs, Float noteFinal) {
 		super();
 		this.objectifs = objectifs;
 		this.noteFinal = noteFinal;
@@ -25,10 +25,10 @@ public class FicheObjectifs {
 	public void setObjectifs(List<Objectif> objectifs) {
 		this.objectifs = objectifs;
 	}
-	public long getNoteFinal() {
+	public Float getNoteFinal() {
 		return noteFinal;
 	}
-	public void setNoteFinal(long noteFinal) {
+	public void setNoteFinal(Float noteFinal) {
 		this.noteFinal = noteFinal;
 	}
 	

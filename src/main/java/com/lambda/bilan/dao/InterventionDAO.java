@@ -11,5 +11,6 @@ import com.lambda.bilan.entities.Intervention;
 public interface InterventionDAO extends CrudRepository<Intervention, Long> {
 	
 	public List<Intervention> findByDateFinInterventionBetweenAndCollaborateur( Date dateDebut,Date dateFin,Collaborateur collaborateur);
-	public List<Intervention> findTop6ByDateFinInterventionLessThanOrderByDateFinInterventionDesc(Date date);
+	public List<Intervention> findTop6ByProjet_IdEvaluateurAndDateFinInterventionLessThanOrderByDateFinInterventionDesc(Long id,Date date);
+	public Intervention findOneByIdProjetAndIdCollaborateur(Long idProjet, Long idCollaborateur);
 }

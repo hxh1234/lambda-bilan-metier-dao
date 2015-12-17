@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +32,7 @@ public class Collaborateur extends Utilisateur implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idManagerRH")
 	@JsonIgnore
-	private ManagerRH managerRH;
+	@NotNull private ManagerRH managerRH;
 
 	// clé étrangère
 	@Column(name = "idManagerRH", insertable = false, updatable = false)

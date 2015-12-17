@@ -33,15 +33,15 @@ public class Utilisateur implements Serializable {
 	private Long idUtilisateur;	
 	private String urlPhotoUtilisateur;
 	@JsonIgnore
-	private String passwordUtilisateur;
-	private String telephoneUtilisateur;
-	private String sexeUtilisateur;
+	@NotNull private String passwordUtilisateur;
+	@NotNull private String telephoneUtilisateur;
+	@NotNull private String sexeUtilisateur;
 	@NotNull private String nomUtilisateur;
-	private String prenomUtilisateur;
-	private String emailUtilisateur;
+	@NotNull private String prenomUtilisateur;
+	@NotNull private String emailUtilisateur;
 	@Temporal(TemporalType.DATE)
-	private Date dateNaissanceUtilisateur;
-	private String adresseUtilisateur;
+	@NotNull private Date dateNaissanceUtilisateur;
+	@NotNull private String adresseUtilisateur;
 	private String idCalendrierUtilisateur;
 	
 	

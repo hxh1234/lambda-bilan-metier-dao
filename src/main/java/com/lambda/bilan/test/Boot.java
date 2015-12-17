@@ -33,6 +33,7 @@ import com.lambda.bilan.metier.IObjectifMetier;
 import com.lambda.bilan.metier.IPlanAmeliorationMetier;
 import com.lambda.bilan.metier.IProjetMetier;
 import com.lambda.bilan.metier.IUtilisateurMetier;
+import com.lambda.bilan.metier.MailMetier;
 import com.lambda.bilan.metier.ProjetMetier;
 import com.lambda.bilan.metier.UtilisateurMetier;
 
@@ -54,6 +55,7 @@ public class Boot {
 		IUtilisateurMetier utilisateurMetier = context.getBean(IUtilisateurMetier.class);
 		IFeedBackMetier feedBackMetier =context.getBean(IFeedBackMetier.class);
 		IPlanAmeliorationMetier planAmeliorationMetier =context.getBean(IPlanAmeliorationMetier.class);
+		MailMetier mailMetier=context.getBean(MailMetier.class);
 		//
 		Test m = context.getBean(Test.class);
 		IProjetMetier projetMetier =context.getBean(IProjetMetier.class);
@@ -65,7 +67,10 @@ public class Boot {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String dateInString = "2015-12-01";
 			Date date = sdf.parse(dateInString);
-			
+			collaborateur.setEmailUtilisateur("anas.masaaf@gmail.com");
+			collaborateur.setNomUtilisateur("MAsaaf");
+			collaborateur.setPasswordUtilisateur("passssA123");
+			//mailMetier.sendMailNewCollaborateur(collaborateur);
 			PlanAmelioration  planAmelioration = planAmeliorationMetier.getPlanAmeliorationOfCollaborateurByYear(collaborateur, date);
 			
 			List<Action> actions = planAmelioration.getActions();

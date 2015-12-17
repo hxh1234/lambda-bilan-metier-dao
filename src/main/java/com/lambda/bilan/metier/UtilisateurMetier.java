@@ -85,8 +85,11 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		try {
 			if(utilisateur.getIdUtilisateur()==null)
 				throw new LambdaException(PropretiesHelper.getText("utilisateur.update.fail"));
-			else
+			else{
+				utilisateur.setPasswordUtilisateur(utilisateurDao.findOne(utilisateur.getIdUtilisateur()).getPasswordUtilisateur());
 				utilisateurDao.save(utilisateur);
+			}
+				
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.fail"));
 		}

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,7 +26,7 @@ public class Projet implements Serializable{
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idEvaluateur")
-	private Evaluateur evaluateur;
+	@NotNull private Evaluateur evaluateur;
 
 	// clé étrangère
 	@Column(name = "idEvaluateur", insertable = false, updatable = false)
