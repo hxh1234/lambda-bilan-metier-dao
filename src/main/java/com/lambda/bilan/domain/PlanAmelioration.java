@@ -15,7 +15,10 @@ public class PlanAmelioration {
 		this.planFormations = planFormations;
 		this.actions = actions;
 	}
-
+	public PlanAmelioration() {
+		super();
+		
+	}
 	public List<PlanFormation> getPlanFormations() {
 		return planFormations;
 	}

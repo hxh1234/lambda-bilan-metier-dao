@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lambda.bilan.dao.InterventionDAO;
-import com.lambda.bilan.dao.NoteDAO;
 import com.lambda.bilan.domain.FeedBack;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Intervention;
@@ -18,16 +17,13 @@ import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.LambdaException;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
-import scala.collection.generic.BitOperations.Int;
-
 @Service("FeedBack")
 @Transactional(rollbackFor= LambdaException.class)
 public class FeedBackMetier implements IFeedBackMetier {
 
 	@Autowired
 	private InterventionDAO interventionDAO;
-	@Autowired
-	private NoteDAO noteDAO;
+
 
 	@Override
 	public List<FeedBack> getAllfeedBackOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP)  throws LambdaException {
@@ -66,15 +62,6 @@ public class FeedBackMetier implements IFeedBackMetier {
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("feedback.list.empty"));
 		}
-	}
-
-	@Override
-	public void addFeedBack(FeedBack feedBack) throws LambdaException {
-		try {
-			noteDAO.save(feedBack.getIntervention().getNotes());
-		} catch (Exception e) {
-			throw new LambdaException(PropretiesHelper.getText("feedback.add.fail"));
-		}	
 	}
 
 }

@@ -25,4 +25,7 @@ public interface CollaborateurDAO extends CrudRepository<Collaborateur, Long> {
 	public List<Collaborateur> getAllCollaborateurWithoutObjectif() ;
 	
 	public List<Collaborateur> findByEtatCollaborateur(Boolean bool);
+	
+	@Query("select c from Collaborateur c where month(c.dateEmbaucheCollaborateur) = month(current_date()) and c.etatCollaborateur = true)")  
+	public List<Collaborateur> getAllCollaborateurBAP();
 }

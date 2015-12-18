@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Action implements Serializable{
@@ -25,7 +26,7 @@ public class Action implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAction;
 	@Temporal(TemporalType.DATE)
-	private Date dateAction;
+	private Date dateAction=new Date();
 	private String messageAction;
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
@@ -40,9 +41,11 @@ public class Action implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@JsonIgnore
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
 	}
+	@JsonProperty
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
 	}

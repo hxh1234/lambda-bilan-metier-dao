@@ -10,5 +10,4 @@ import com.lambda.bilan.helpers.LambdaException;
 public interface IFeedBackMetier {
 	
 	public List<FeedBack> getAllfeedBackOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP) throws LambdaException; // *
-	public void addFeedBack(FeedBack feedBack) throws LambdaException;
 }

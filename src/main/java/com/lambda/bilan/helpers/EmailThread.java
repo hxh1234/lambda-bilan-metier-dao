@@ -38,12 +38,12 @@ public class EmailThread extends Thread {
 				System.out.println(">>SENT TO:" + email);
 			}
 			
-			System.out.println(">>SENDING END");//Debug
-			
+			System.out.println(">>SENDING END");//Debug			
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println(">>Error !");
 		}finally{
-			//this.destroy();
+			this.interrupt();
 		}
 	}
 
