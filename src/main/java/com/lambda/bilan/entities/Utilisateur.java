@@ -33,7 +33,7 @@ public class Utilisateur implements Serializable {
 	private Long idUtilisateur;	
 	private String urlPhotoUtilisateur;
 	@JsonIgnore
-	@NotNull private String passwordUtilisateur;
+	private String passwordUtilisateur;
 	@NotNull private String telephoneUtilisateur;
 	@NotNull private String sexeUtilisateur;
 	@NotNull private String nomUtilisateur;

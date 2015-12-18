@@ -44,11 +44,11 @@ public class PlanAmeliorationMetier implements IPlanAmeliorationMetier {
 	public void addPlanAmelioration(PlanAmelioration planAmelioration) throws LambdaException {
 		try {
 			planFormationDAO.save(planAmelioration.getPlanFormations());
-		actionDAO.save(planAmelioration.getActions());
+			actionDAO.save(planAmelioration.getActions());
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("planAmelioration.add.fail"));
 		}
-		
+
 	}
 
 }

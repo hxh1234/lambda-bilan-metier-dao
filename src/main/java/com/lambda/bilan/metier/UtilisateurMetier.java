@@ -74,6 +74,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		try {
 			utilisateurDao.save(utilisateur);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.add.fail"));
 		}
 
