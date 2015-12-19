@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class EmailThread {
+public class EmailThread extends Thread {
 	
 	@Autowired
 	private EmailSender emailSender;
@@ -20,6 +20,7 @@ public class EmailThread {
 	private List<MailModel> model;
 	private String template;
 	
+	@Override
 	public void run() {
 		try {
 			
@@ -32,14 +33,9 @@ public class EmailThread {
 				MailModel model = this.model.get(i);
 				
 				//send emails
-				if(email!=null){
-					System.out.println(">>SENDING TO:" + email);
-					emailSender.sendMail(email, template, model);
-					System.out.println(">>SENT TO:" + email);
-				}
-				else
-					System.out.println(">> ERROR :Email vide");
-				
+				System.out.println(">>SENDING TO:" + email);
+				emailSender.sendMail(email, template, model);
+				System.out.println(">>SENT TO:" + email);
 			}
 			
 			System.out.println(">>SENDING END");//Debug	
@@ -47,6 +43,7 @@ public class EmailThread {
 			e.printStackTrace();
 			System.out.println(">>Error !");
 		}finally{
+			//this.interrupt();
 		}
 	}
 

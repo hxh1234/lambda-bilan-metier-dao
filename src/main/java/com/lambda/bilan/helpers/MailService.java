@@ -1,4 +1,4 @@
-package com.lambda.bilan.metier;
+package com.lambda.bilan.helpers;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 import com.lambda.bilan.dao.CollaborateurDAO;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Utilisateur;
-import com.lambda.bilan.helpers.EmailThread;
-import com.lambda.bilan.helpers.MailModel;
 
 @Component
 @Scope("prototype")
-public class MailMetier implements IMailMetier {
+public class MailService {
 	private final static String TEMPLATE_NEW_USER="template/mail-new-created-template.vm";
+	private final static String TEMPLATE_PASSWORD_FORGET="template/mail-forget-password-template.vm";
+	private final static String TEMPLATE_FEEDBACK_VALIDE="template/mail-feedback-valide-template.vm";
 	private final static String TEMPLATE_ALERT_MANAGERRH="template/mail-managerRH-alert-template.vm";
 
 	@Autowired
@@ -25,7 +25,6 @@ public class MailMetier implements IMailMetier {
 	@Autowired
 	CollaborateurDAO collaborateurDAO;
 
-	@Override
 	public void sendMailNewUtilisateur(Utilisateur utilisateur) {		
 		MailModel model = new MailModel();
 		model.addModel(utilisateur.getNomUtilisateur());
@@ -36,7 +35,35 @@ public class MailMetier implements IMailMetier {
 		emailThread.run();
 	}
 
-	@Override
+	
+	public void sendMailForgetPassword(Utilisateur utilisateur) {		
+		MailModel model = new MailModel();
+		model.addModel(utilisateur.getNomUtilisateur());
+		model.addModel(utilisateur.getPasswordUtilisateur());
+		emailThread.setModel(model);
+		emailThread.setEmail(utilisateur.getEmailUtilisateur());
+		emailThread.setTemplate(TEMPLATE_PASSWORD_FORGET);
+		emailThread.run();
+	}
+	
+	public void sendMailFeedbackValide(List<Utilisateur> utilisateurs , String nomCollaborateur,String nomProjet) {		
+		List<MailModel> models = new ArrayList<MailModel>();
+		List<String> mails =new ArrayList<String>();
+		MailModel mailModel;
+		for (Utilisateur utilisateur : utilisateurs) {
+			mailModel = new MailModel();
+			mailModel.addModel(utilisateur.getNomUtilisateur());
+			mailModel.addModel(nomCollaborateur);
+			mailModel.addModel(nomProjet);
+			models.add(mailModel);
+			mails.add(utilisateur.getEmailUtilisateur());
+		}
+		emailThread.setModel(models);
+		emailThread.setEmail(mails);
+		emailThread.setTemplate(TEMPLATE_FEEDBACK_VALIDE);
+		emailThread.run();
+	}
+
 	public void sendMailsManagerRH() {
 
 		List<MailModel> models = new ArrayList<MailModel>();

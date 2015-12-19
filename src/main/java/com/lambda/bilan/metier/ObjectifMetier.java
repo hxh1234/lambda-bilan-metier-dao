@@ -87,12 +87,14 @@ public class ObjectifMetier implements IObjectifMetier{
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void refuserObjectif(Long id) throws LambdaException {
 		try {
+			int monthNow = new Date().getMonth();
 			Objectif objectif = objectifDAO.findOne(id);
 			Integer compteur = objectif.getCompteurRejet()+1;
-			if (compteur>3)
+			if (compteur>3 || objectif.getCollaborateur().getDateEmbaucheCollaborateur().getMonth()!=monthNow)
 				throw new LambdaException(PropretiesHelper.getText("objectif.rejet.fail"));
 			else
 				objectifDAO.refuserObjectif(compteur,id);
@@ -142,6 +144,33 @@ public class ObjectifMetier implements IObjectifMetier{
 			noteFinal/=100;
 			return new FicheObjectifs(objectifs, noteFinal);
 		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));
+		}
+	}
+	
+	@Override
+	public FicheObjectifs getFicheObjectifsOfCollaborateur(Collaborateur collaborateur,Date dateBAP)  throws LambdaException{
+		try {
+			List<Objectif> objectifs = objectifDAO.findByCollaborateurAndDateCreationObjectifBetweenAndStatutObjectif(collaborateur,  DateHelper.dateSubtractYear(dateBAP),dateBAP,StatutObjectif.VALIDER.toString());
+			Float noteFinal=0.0F;
+			boolean calculerNoteFinal=true;
+			for (Objectif objectif : objectifs) {
+				for (Mesure mesure : objectif.getMesures()) {
+					if(mesure.getModeAccesMesure()==false){
+						calculerNoteFinal =false;
+						mesure.setResultatMesure(null);
+					}
+					if (calculerNoteFinal==true)
+						noteFinal+=mesure.getResultatMesure()*mesure.getPoidsMesure();
+				}
+			}
+			if (calculerNoteFinal==true)
+				noteFinal/=100;
+			else
+				noteFinal=null;
+			return new FicheObjectifs(objectifs, noteFinal);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			throw new LambdaException(PropretiesHelper.getText("objectif.list.empty"));
 		}
 	}

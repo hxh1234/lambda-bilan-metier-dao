@@ -17,7 +17,11 @@ import com.lambda.bilan.entities.Evaluateur;
 import com.lambda.bilan.entities.ManagerRH;
 import com.lambda.bilan.entities.Utilisateur;
 import com.lambda.bilan.helpers.LambdaException;
+import com.lambda.bilan.helpers.MailService;
 import com.lambda.bilan.helpers.PropretiesHelper;
+import com.lambda.bilan.helpers.RandomGenerator;
+
+import ch.qos.logback.classic.pattern.Util;
 
 @Service
 @Transactional (rollbackFor= LambdaException.class)
@@ -31,8 +35,10 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	private ManagerRHDAO managerRHDAO;
 	@Autowired
 	private EvaluateurDAO evaluateurDAO;
+	@Autowired
+	private MailService mailMetier;
 
-
+	//Les collaborateurs d'un Manager RH
 	@Override
 	public List<Collaborateur> getAllCollaborateurOfManagerRH(Long idManagerRH)  throws LambdaException {
 		try {
@@ -41,7 +47,8 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("collaborateur.list.load.fail"));
 		}
 	}
-
+	
+	//Les collaborateurs intervenants dans un Projet
 	@Override
 	public List<Collaborateur> getAllCollaborateurOfProjet(Long idProjet) throws LambdaException {
 		try {
@@ -51,6 +58,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		}
 	}
 
+	//Les collaborateur qui en pas des projets
 	@Override
 	public List<Collaborateur> getAllCollaborateurWithoutProject() throws LambdaException {
 		try {
@@ -60,6 +68,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		}
 	}
 
+	//Les collaborateur qui en pas des objectifs
 	@Override
 	public List<Collaborateur> getAllCollaborateurWithoutObjectif() throws LambdaException {
 		try {
@@ -72,7 +81,13 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	@Override
 	public void addUtilisateur(Utilisateur utilisateur) throws LambdaException{
 		try {
+			//Generer un password
+			String passwordUtilisateur = RandomGenerator.randomString();
+			utilisateur.setPasswordUtilisateur(passwordUtilisateur);
+			//Sauvgarder
 			utilisateurDao.save(utilisateur);
+			//Send mail password
+			mailMetier.sendMailNewUtilisateur(utilisateur);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.add.fail"));
@@ -104,6 +119,28 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.password.fail"));
 		}
 	}
+	
+
+	@Override
+	public void forgetPassword(Utilisateur utilisateur) throws LambdaException {
+		try {
+			Utilisateur utilisateur2 = utilisateurDao.findOne(utilisateur.getIdUtilisateur());
+			if(utilisateur2.getEmailUtilisateur().equals(utilisateur.getEmailUtilisateur())){
+				//Generer un password
+				String newPassword = RandomGenerator.randomString();
+				//Sauvgarder
+				utilisateurDao.updatePassword(newPassword, utilisateur.getIdUtilisateur());
+				//Send mail password
+				utilisateur2.setPasswordUtilisateur(newPassword);
+				mailMetier.sendMailForgetPassword(utilisateur2);
+			}else
+				throw new LambdaException(PropretiesHelper.getText("utilisateur.update.password.fail"));
+			
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.password.fail"));
+		}
+	}
+	
 	@Override
 	public void deleteUtilisateur(Long id)throws LambdaException {
 		try {
@@ -146,6 +183,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 
 	}
 
+	//Les collaborateur partir
 	@Override
 	public List<Collaborateur> getAllOldCollaborateur() throws LambdaException {
 		try {
@@ -173,7 +211,5 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.list.load.fail"));
 		}
 	}
-
-
 
 }

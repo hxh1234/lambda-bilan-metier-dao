@@ -23,5 +23,6 @@ public interface IObjectifMetier {
 	public List<Objectif> getAllObjectifsOfCollaborateurThisYear(Collaborateur collaborateur) throws LambdaException;
 	public List<Objectif> getAllObjectifsRefusFromCollaborateurOfManagerRH(Long id) throws LambdaException;
 	public FicheObjectifs getFicheObjectifsOfCollaborateurByYear(Collaborateur collaborateur,Date dateBAP) throws LambdaException;
+	public FicheObjectifs getFicheObjectifsOfCollaborateur(Collaborateur collaborateur,Date dateBAP) throws LambdaException;
 	public List<Categorie> getAllCategorie() throws LambdaException;
 }

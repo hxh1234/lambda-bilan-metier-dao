@@ -8,14 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.api.client.util.Lists;
+import com.lambda.bilan.dao.AdministrateurDAO;
 import com.lambda.bilan.dao.InterventionDAO;
 import com.lambda.bilan.dao.NoteDAO;
 import com.lambda.bilan.domain.FeedBack;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Intervention;
 import com.lambda.bilan.entities.Note;
+import com.lambda.bilan.entities.Utilisateur;
 import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.LambdaException;
+import com.lambda.bilan.helpers.MailService;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service("FeedBack")
@@ -26,7 +30,10 @@ public class FeedBackMetier implements IFeedBackMetier {
 	private InterventionDAO interventionDAO;
 	@Autowired
 	private NoteDAO noteDAO;
-
+	@Autowired
+	private AdministrateurDAO administrateurDAO;
+	@Autowired
+	private MailService mailService;
 
 	@Override
 	public List<FeedBack> getAllfeedBackOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP)  throws LambdaException {
@@ -76,14 +83,24 @@ public class FeedBackMetier implements IFeedBackMetier {
 			System.out.println(e.getMessage());
 			throw new LambdaException(PropretiesHelper.getText("feedback.add.fail"));
 		}
-		
 	}
 
 
 	@Override
 	public void validerFeedBack(Long idIntervention) throws LambdaException {
 		try {
+			//validation
 			interventionDAO.validerFeedback(idIntervention);
+			//send mails
+			Intervention intervention =interventionDAO.findOne(idIntervention);
+			String nomProjet = intervention.getProjet().getNomProjet();
+			String nomCollaborateur =intervention.getCollaborateur().getNomUtilisateur();
+			List<Utilisateur> utilisateurs = Lists.newArrayList(administrateurDAO.findAll());
+			utilisateurs.add(intervention.getCollaborateur().getManagerRH());
+			utilisateurs.add(intervention.getCollaborateur());
+			mailService.sendMailFeedbackValide(utilisateurs, nomCollaborateur, nomProjet);
+			//Création d’entré dans Google Agenda
+			
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("feedback.valide.fail"));
 		}

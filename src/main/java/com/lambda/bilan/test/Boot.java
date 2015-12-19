@@ -27,13 +27,13 @@ import com.lambda.bilan.entities.Projet;
 import com.lambda.bilan.entities.Utilisateur;
 import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.LambdaException;
+import com.lambda.bilan.helpers.MailService;
 import com.lambda.bilan.metier.IBAPMetier;
 import com.lambda.bilan.metier.IFeedBackMetier;
 import com.lambda.bilan.metier.IObjectifMetier;
 import com.lambda.bilan.metier.IPlanAmeliorationMetier;
 import com.lambda.bilan.metier.IProjetMetier;
 import com.lambda.bilan.metier.IUtilisateurMetier;
-import com.lambda.bilan.metier.MailMetier;
 import com.lambda.bilan.metier.ProjetMetier;
 import com.lambda.bilan.metier.UtilisateurMetier;
 
@@ -55,7 +55,7 @@ public class Boot {
 		IUtilisateurMetier utilisateurMetier = context.getBean(IUtilisateurMetier.class);
 		IFeedBackMetier feedBackMetier =context.getBean(IFeedBackMetier.class);
 		IPlanAmeliorationMetier planAmeliorationMetier =context.getBean(IPlanAmeliorationMetier.class);
-		MailMetier mailMetier=context.getBean(MailMetier.class);
+		MailService mailMetier=context.getBean(MailService.class);
 		//
 		Test m = context.getBean(Test.class);
 		IProjetMetier projetMetier =context.getBean(IProjetMetier.class);
