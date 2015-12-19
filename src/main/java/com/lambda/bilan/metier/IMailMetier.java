@@ -1,10 +1,10 @@
 package com.lambda.bilan.metier;
 
-import com.lambda.bilan.entities.Collaborateur;
+import com.lambda.bilan.entities.Utilisateur;
 
 public interface IMailMetier {
 
-	public void sendMailNewCollaborateur(Collaborateur collaborateur);
+	public void sendMailNewUtilisateur(Utilisateur utilisateur);
 	public void sendMailsManagerRH();
 	
 }

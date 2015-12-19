@@ -73,6 +73,7 @@ public class FeedBackMetier implements IFeedBackMetier {
 		try {
 			noteDAO.save(notes);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			throw new LambdaException(PropretiesHelper.getText("feedback.add.fail"));
 		}
 		
