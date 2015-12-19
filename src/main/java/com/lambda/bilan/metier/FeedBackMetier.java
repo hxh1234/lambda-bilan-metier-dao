@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lambda.bilan.dao.InterventionDAO;
+import com.lambda.bilan.dao.NoteDAO;
 import com.lambda.bilan.domain.FeedBack;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.entities.Intervention;
@@ -23,6 +24,8 @@ public class FeedBackMetier implements IFeedBackMetier {
 
 	@Autowired
 	private InterventionDAO interventionDAO;
+	@Autowired
+	private NoteDAO noteDAO;
 
 
 	@Override
@@ -61,6 +64,27 @@ public class FeedBackMetier implements IFeedBackMetier {
 
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("feedback.list.empty"));
+		}
+	}
+
+
+	@Override
+	public void addFeedBack(List<Note> notes)throws LambdaException {
+		try {
+			noteDAO.save(notes);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("feedback.add.fail"));
+		}
+		
+	}
+
+
+	@Override
+	public void validerFeedBack(Long idIntervention) throws LambdaException {
+		try {
+			interventionDAO.validerFeedback(idIntervention);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("feedback.valide.fail"));
 		}
 	}
 

@@ -41,7 +41,7 @@ public class Intervention implements Serializable{
 	private String nomIntervention ="sans nom";
 	private String remarqueIntervention="sans remarque";
 	private String roleJoue;
-	private Boolean etatIntervention;
+	private Boolean etatIntervention= false;
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="idIntervention")
