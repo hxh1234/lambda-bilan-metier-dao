@@ -14,7 +14,7 @@ import com.lambda.bilan.entities.Utilisateur;
 
 @Component
 @Scope("prototype")
-public class MailService {
+public class EmailService {
 	private final static String TEMPLATE_NEW_USER="template/mail-new-created-template.vm";
 	private final static String TEMPLATE_PASSWORD_FORGET="template/mail-forget-password-template.vm";
 	private final static String TEMPLATE_FEEDBACK_VALIDE="template/mail-feedback-valide-template.vm";
@@ -26,7 +26,7 @@ public class MailService {
 	CollaborateurDAO collaborateurDAO;
 
 	public void sendMailNewUtilisateur(Utilisateur utilisateur) {		
-		MailModel model = new MailModel();
+		EmailModel model = new EmailModel();
 		model.addModel(utilisateur.getNomUtilisateur());
 		model.addModel(utilisateur.getPasswordUtilisateur());
 		emailThread.setModel(model);
@@ -37,7 +37,7 @@ public class MailService {
 
 	
 	public void sendMailForgetPassword(Utilisateur utilisateur) {		
-		MailModel model = new MailModel();
+		EmailModel model = new EmailModel();
 		model.addModel(utilisateur.getNomUtilisateur());
 		model.addModel(utilisateur.getPasswordUtilisateur());
 		emailThread.setModel(model);
@@ -47,11 +47,11 @@ public class MailService {
 	}
 	
 	public void sendMailFeedbackValide(List<Utilisateur> utilisateurs , String nomCollaborateur,String nomProjet) {		
-		List<MailModel> models = new ArrayList<MailModel>();
+		List<EmailModel> models = new ArrayList<EmailModel>();
 		List<String> mails =new ArrayList<String>();
-		MailModel mailModel;
+		EmailModel mailModel;
 		for (Utilisateur utilisateur : utilisateurs) {
-			mailModel = new MailModel();
+			mailModel = new EmailModel();
 			mailModel.addModel(utilisateur.getNomUtilisateur());
 			mailModel.addModel(nomCollaborateur);
 			mailModel.addModel(nomProjet);
@@ -66,15 +66,15 @@ public class MailService {
 
 	public void sendMailsManagerRH() {
 
-		List<MailModel> models = new ArrayList<MailModel>();
+		List<EmailModel> models = new ArrayList<EmailModel>();
 		List<String> mails =new ArrayList<String>();
 
 		boolean etat=false;
-		MailModel mailModel;
+		EmailModel mailModel;
 		int i=0,j=0;
 		for(Collaborateur collaborateur : collaborateurDAO.getAllCollaborateurBAP()){
 			if(j==0){
-				mailModel = new MailModel();
+				mailModel = new EmailModel();
 				mailModel.addModel(collaborateur.getManagerRH().getIdUtilisateur().toString());
 				mailModel.addModel(collaborateur.getManagerRH().getNomUtilisateur());
 				mailModel.addModel(Calendar.getInstance().getTime().toString());
@@ -88,7 +88,7 @@ public class MailService {
 					etat=true;
 				}else{
 					i++;
-					mailModel = new MailModel();
+					mailModel = new EmailModel();
 					mailModel.addModel(collaborateur.getManagerRH().getIdUtilisateur().toString());
 					mailModel.addModel(collaborateur.getManagerRH().getNomUtilisateur());
 					mailModel.addModel(Calendar.getInstance().getTime().toString());

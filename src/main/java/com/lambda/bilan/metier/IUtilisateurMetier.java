@@ -21,6 +21,7 @@ public interface IUtilisateurMetier {
 		public void addUtilisateur(Utilisateur utilisateur) throws LambdaException; // *
 		public void updateUtilisateur(Utilisateur utilisateur) throws LambdaException; // *
 		public void updatePassword(String password , Long id) throws LambdaException;
+		public void updateIdCalendrier(Long idUtilisateur, Long idCalendrierUtilisateur) throws LambdaException;
 		public void forgetPassword(Utilisateur utilisateur) throws LambdaException;
 		public void deleteUtilisateur(Long id) throws LambdaException; // *
 		public Utilisateur getUtilisateur(Long id) throws LambdaException;

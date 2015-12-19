@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.google.api.client.util.DateTime;
-import com.lambda.bilan.metier.IGoogleAgendaMetier;
 
 
 @Component
@@ -18,7 +17,7 @@ import com.lambda.bilan.metier.IGoogleAgendaMetier;
 public class GoogleAgendaThread extends Thread {
 	
 	@Autowired
-	private IGoogleAgendaMetier metier;
+	private GoogleAgendaMetier metier;
 	
 	private List<String> calendarIDs;
 	private String titre;
@@ -28,17 +27,26 @@ public class GoogleAgendaThread extends Thread {
 	public void run() {
 		try {
 			
-			System.out.println(">>SENDING events START");//Debug
+			System.out.println(">>SAVING events START");//Debug
 			
 			//iterate over emails
 			for(String calendarID : calendarIDs){
 				//send emails
-				System.out.println(">>SENDING TO:" + calendarID);
-				metier.createAllDayEvent(titre, description, date, calendarID);
-				System.out.println(">>SENT TO:" + calendarID);				
+				System.out.println(">>SAVING IN:" + calendarID);
+				if(calendarID!=null){
+					if (metier.checkAuthorityToWrite(calendarID)==true) {
+					metier.createAllDayEvent(titre, description, date, calendarID);
+					System.out.println(">>SAVED IN:" + calendarID);	
+				}
+				else
+					System.out.println(">>ERROR : agenda privé");
+				}
+				else
+					System.out.println(">>ERROR : pas d'agenda");
+								
 			}
 					
-			System.out.println(">>SENDING END");//Debug
+			System.out.println(">>SAVING END");//Debug
 			
 		} catch (Exception e) {
 			e.printStackTrace();

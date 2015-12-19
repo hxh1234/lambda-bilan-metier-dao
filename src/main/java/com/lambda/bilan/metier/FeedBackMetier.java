@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.hql.internal.ast.tree.AggregateNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,9 @@ import com.lambda.bilan.entities.Intervention;
 import com.lambda.bilan.entities.Note;
 import com.lambda.bilan.entities.Utilisateur;
 import com.lambda.bilan.helpers.DateHelper;
+import com.lambda.bilan.helpers.GoogleAgendaThread;
 import com.lambda.bilan.helpers.LambdaException;
-import com.lambda.bilan.helpers.MailService;
+import com.lambda.bilan.helpers.EmailService;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service("FeedBack")
@@ -33,7 +35,9 @@ public class FeedBackMetier implements IFeedBackMetier {
 	@Autowired
 	private AdministrateurDAO administrateurDAO;
 	@Autowired
-	private MailService mailService;
+	private EmailService mailService;
+	@Autowired
+	GoogleAgendaThread googleAgendaThread;
 
 	@Override
 	public List<FeedBack> getAllfeedBackOfCollaborateurByYear(Collaborateur collaborateur, Date dateBAP)  throws LambdaException {
@@ -100,6 +104,15 @@ public class FeedBackMetier implements IFeedBackMetier {
 			utilisateurs.add(intervention.getCollaborateur());
 			mailService.sendMailFeedbackValide(utilisateurs, nomCollaborateur, nomProjet);
 			//Création d’entré dans Google Agenda
+			List<String> list = new ArrayList<String>();
+			list.add("lambda.bilan@gmail.com");
+			list.add(intervention.getCollaborateur().getIdCalendrierUtilisateur());
+			list.add(intervention.getProjet().getEvaluateur().getIdCalendrierUtilisateur());
+	    	googleAgendaThread.setCalendarIDs(list);
+	    	googleAgendaThread.setDate(DateHelper.getCurrentDate());
+	    	googleAgendaThread.setTitre("Validation du Feedback");
+	    	googleAgendaThread.setDescription("le feedback de "+nomCollaborateur+" sur le projet "+nomProjet+" est validé par "+intervention.getProjet().getEvaluateur().getNomUtilisateur());
+	    	googleAgendaThread.run();
 			
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("feedback.valide.fail"));

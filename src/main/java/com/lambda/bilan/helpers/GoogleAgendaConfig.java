@@ -81,9 +81,5 @@ public class GoogleAgendaConfig {
                 		   .setApplicationName(APPLICATION_NAME)
                 		   .build();
     }
-    
-  
-    
-    
 
 }

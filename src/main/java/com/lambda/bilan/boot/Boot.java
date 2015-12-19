@@ -20,10 +20,10 @@ import com.google.api.client.util.DateTime;
 import com.lambda.bilan.entities.Collaborateur;
 import com.lambda.bilan.helpers.DateHelper;
 import com.lambda.bilan.helpers.EmailThread;
+import com.lambda.bilan.helpers.GoogleAgendaMetier;
 import com.lambda.bilan.helpers.GoogleAgendaThread;
-import com.lambda.bilan.helpers.MailService;
-import com.lambda.bilan.helpers.MailModel;
-import com.lambda.bilan.metier.GoogleAgendaMetier;
+import com.lambda.bilan.helpers.EmailService;
+import com.lambda.bilan.helpers.EmailModel;
 
 
 

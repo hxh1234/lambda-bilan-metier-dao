@@ -24,7 +24,7 @@ public class EmailSender {
 	@Autowired
 	private VelocityEngine velocityEngine;
 	
-	public void sendMail(final String to, final String template,final MailModel model ) throws Exception {
+	public void sendMail(final String to, final String template,final EmailModel model ) throws Exception {
 		
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
         	

@@ -17,11 +17,9 @@ import com.lambda.bilan.entities.Evaluateur;
 import com.lambda.bilan.entities.ManagerRH;
 import com.lambda.bilan.entities.Utilisateur;
 import com.lambda.bilan.helpers.LambdaException;
-import com.lambda.bilan.helpers.MailService;
+import com.lambda.bilan.helpers.EmailService;
 import com.lambda.bilan.helpers.PropretiesHelper;
 import com.lambda.bilan.helpers.RandomGenerator;
-
-import ch.qos.logback.classic.pattern.Util;
 
 @Service
 @Transactional (rollbackFor= LambdaException.class)
@@ -36,7 +34,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	@Autowired
 	private EvaluateurDAO evaluateurDAO;
 	@Autowired
-	private MailService mailMetier;
+	private EmailService mailMetier;
 
 	//Les collaborateurs d'un Manager RH
 	@Override
@@ -120,6 +118,14 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		}
 	}
 	
+	@Override
+	public void updateIdCalendrier(Long idUtilisateur, Long idCalendrierUtilisateur) throws LambdaException {
+		try {
+			utilisateurDao.updateIdCalendrier(idUtilisateur, idCalendrierUtilisateur);
+	} catch (Exception e) {
+		throw new LambdaException(PropretiesHelper.getText("utilisateur.update.calander.fail"));
+	}
+	}
 
 	@Override
 	public void forgetPassword(Utilisateur utilisateur) throws LambdaException {
@@ -211,5 +217,4 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.list.load.fail"));
 		}
 	}
-
 }

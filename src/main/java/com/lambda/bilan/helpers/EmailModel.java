@@ -6,7 +6,7 @@ package com.lambda.bilan.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MailModel {
+public class EmailModel {
 	private List<String> models = new ArrayList<String>();
 
 	public List<String> getModels() {

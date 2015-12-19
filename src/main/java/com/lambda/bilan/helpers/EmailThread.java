@@ -17,7 +17,7 @@ public class EmailThread extends Thread {
 	@Autowired
 	private EmailSender emailSender;
 	private List<String> email;
-	private List<MailModel> model;
+	private List<EmailModel> model;
 	private String template;
 	
 	@Override
@@ -30,7 +30,7 @@ public class EmailThread extends Thread {
 			for(int i=0; i<email.size(); i++){
 				//get data
 				String email = this.email.get(i);
-				MailModel model = this.model.get(i);
+				EmailModel model = this.model.get(i);
 				
 				//send emails
 				System.out.println(">>SENDING TO:" + email);
@@ -48,8 +48,8 @@ public class EmailThread extends Thread {
 	}
 
 	//signal email
-	public void setModel(MailModel model) {
-		this.model = new ArrayList<MailModel>();
+	public void setModel(EmailModel model) {
+		this.model = new ArrayList<EmailModel>();
 		this.model.add(model);
 	}
 
@@ -75,11 +75,11 @@ public class EmailThread extends Thread {
 		this.email = email;
 	}
 
-	public List<MailModel> getModel() {
+	public List<EmailModel> getModel() {
 		return model;
 	}
 
-	public void setModel(List<MailModel> model) {
+	public void setModel(List<EmailModel> model) {
 		this.model = model;
 	}
 	
