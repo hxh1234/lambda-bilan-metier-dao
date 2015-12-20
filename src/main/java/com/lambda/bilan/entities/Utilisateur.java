@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
 @DiscriminatorColumn( name = "ROLE",discriminatorType = DiscriminatorType.STRING )
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"emailUtilisateur"}))
 public class Utilisateur implements Serializable {
 
 

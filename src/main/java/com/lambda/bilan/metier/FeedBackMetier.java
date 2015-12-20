@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.hql.internal.ast.tree.AggregateNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +18,9 @@ import com.lambda.bilan.entities.Intervention;
 import com.lambda.bilan.entities.Note;
 import com.lambda.bilan.entities.Utilisateur;
 import com.lambda.bilan.helpers.DateHelper;
+import com.lambda.bilan.helpers.EmailService;
 import com.lambda.bilan.helpers.GoogleAgendaThread;
 import com.lambda.bilan.helpers.LambdaException;
-import com.lambda.bilan.helpers.EmailService;
 import com.lambda.bilan.helpers.PropretiesHelper;
 
 @Service("FeedBack")

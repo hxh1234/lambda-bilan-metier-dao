@@ -45,7 +45,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("collaborateur.list.load.fail"));
 		}
 	}
-	
+
 	//Les collaborateurs intervenants dans un Projet
 	@Override
 	public List<Collaborateur> getAllCollaborateurOfProjet(Long idProjet) throws LambdaException {
@@ -103,7 +103,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 				utilisateur.setPasswordUtilisateur(utilisateurDao.findOne(utilisateur.getIdUtilisateur()).getPasswordUtilisateur());
 				utilisateurDao.save(utilisateur);
 			}
-				
+
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.fail"));
 		}
@@ -112,19 +112,19 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	@Override
 	public void updatePassword(String password, Long id) throws LambdaException {
 		try {
-				utilisateurDao.updatePassword(password, id);
+			utilisateurDao.updatePassword(password, id);
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.password.fail"));
 		}
 	}
-	
+
 	@Override
-	public void updateIdCalendrier(Long idUtilisateur, Long idCalendrierUtilisateur) throws LambdaException {
+	public void updateIdCalendrier(Long idUtilisateur, String idCalendrierUtilisateur) throws LambdaException {
 		try {
 			utilisateurDao.updateIdCalendrier(idUtilisateur, idCalendrierUtilisateur);
-	} catch (Exception e) {
-		throw new LambdaException(PropretiesHelper.getText("utilisateur.update.calander.fail"));
-	}
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.calander.fail"));
+		}
 	}
 
 	@Override
@@ -141,12 +141,12 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 				mailMetier.sendMailForgetPassword(utilisateur2);
 			}else
 				throw new LambdaException(PropretiesHelper.getText("utilisateur.update.password.fail"));
-			
+
 		} catch (Exception e) {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.password.fail"));
 		}
 	}
-	
+
 	@Override
 	public void deleteUtilisateur(Long id)throws LambdaException {
 		try {

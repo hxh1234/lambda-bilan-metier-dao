@@ -15,5 +15,5 @@ public interface UtilisateurDAO extends CrudRepository<Utilisateur, Long> {
 	
 	@Modifying
     @Query("UPDATE Utilisateur u SET u.idCalendrierUtilisateur = ?2 WHERE u.idUtilisateur = ?1")
-	public void updateIdCalendrier(Long idUtilisateur, Long idCalendrierUtilisateur);
+	public void updateIdCalendrier(Long idUtilisateur, String idCalendrierUtilisateur);
 }
