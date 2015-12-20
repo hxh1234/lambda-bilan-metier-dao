@@ -126,6 +126,15 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.calander.fail"));
 		}
 	}
+	
+	@Override
+	public void updateUrlPhotoUtilisateur(Long idUtilisateur, String urlPhotoUtilisateur) throws LambdaException {
+		try {
+			utilisateurDao.updateUrlPhotoUtilisateur(idUtilisateur, urlPhotoUtilisateur);
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("utilisateur.update.photo.fail"));
+		}
+	}
 
 	@Override
 	public void forgetPassword(Utilisateur utilisateur) throws LambdaException {
@@ -217,4 +226,21 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 			throw new LambdaException(PropretiesHelper.getText("utilisateur.list.load.fail"));
 		}
 	}
+
+	@Override
+	public Utilisateur login(String emailUtilisateur, String passwordUtilisateur) throws LambdaException {
+		try {
+			if(emailUtilisateur==null || passwordUtilisateur==null)
+				throw new LambdaException(PropretiesHelper.getText("utilisateur.id.notfound"));
+			Utilisateur utilisateur=utilisateurDao.login(emailUtilisateur, passwordUtilisateur);
+			if(utilisateur==null)
+				throw new LambdaException(PropretiesHelper.getText("utilisateur.login.fail"));
+			else
+			return utilisateur;
+		} catch (Exception e) {
+			throw new LambdaException(PropretiesHelper.getText("utilisateur.login.fail"));
+		}
+	}
+
+
 }

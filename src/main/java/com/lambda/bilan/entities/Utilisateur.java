@@ -34,7 +34,7 @@ public class Utilisateur implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUtilisateur;	
-	private String urlPhotoUtilisateur;
+	private String urlPhotoUtilisateur="avatar.png";
 	@JsonIgnore
 	private String passwordUtilisateur;
 	@NotNull private String telephoneUtilisateur;

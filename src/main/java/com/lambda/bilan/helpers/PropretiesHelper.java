@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropretiesHelper {
-	private static final String URL_PATH = "/exception.properties";
+	private static final String URL_PATH = "/global.metier.dao.properties";
 
 	public static String getText(String key){
 		Properties prop = new Properties();
